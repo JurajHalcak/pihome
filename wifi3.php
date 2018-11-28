@@ -3,7 +3,6 @@ ini_set('display_errors', 'On');
 error_reporting(E_ALL | E_STRICT);
 require_once(__DIR__.'/st_inc/connection.php');
 require_once(__DIR__.'/st_inc/functions.php');
-echo "01";
 if (!empty($_GET['teplota']) && !empty($_GET['adresa'])) {
 	ZapisDoDB($_GET['teplota'], $_GET['adresa'], $_GET['verzia'],$conn);
 }
@@ -49,5 +48,5 @@ function ZapisDoDB($teplota,$adresa,$verzia,$conn) {
 
 
 if(isset($conn)) { $conn->close();}
-echo "Koniec";
+echo "End";
 ?>
