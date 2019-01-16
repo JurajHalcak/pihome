@@ -16,6 +16,7 @@
 * loss or damage to you or your property.                               *"
 * DO NOT MAKE ANY CHANGES TO YOUR HEATING SYSTEM UNTILL UNLESS YOU KNOW *"
 * WHAT YOU ARE DOING                                                    *"
+* Language support by Juraj Halcak :: juraj@halcak.sk :: 19.01.10       *"
 *************************************************************************"
 */
 
@@ -23,6 +24,7 @@ require_once(__DIR__.'/st_inc/session.php');
 confirm_logged_in();
 require_once(__DIR__.'/st_inc/connection.php');
 require_once(__DIR__.'/st_inc/functions.php');
+require_once(__DIR__.'/lang/sk.inc');
 ?>
 <?php include("header.php");  ?>
 <?php include_once("notice.php"); ?>
@@ -31,7 +33,7 @@ require_once(__DIR__.'/st_inc/functions.php');
             <div class="row">
                 <div class="col-lg-12">
                    	<div id="overridelist" >
-				   <div class="text-center"><br><br><p>Please wait while system grab latest information from database...</p>
+				   <div class="text-center"><br><br><p><?php $LANG['wait_sys_db']; ?>(Info 04)</p>
 				   <br><br><img src="images/loader.gif">
 				   </div>
 				   </div>

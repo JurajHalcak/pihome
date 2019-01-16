@@ -16,6 +16,7 @@
 * loss or damage to you or your property.                               *"
 * DO NOT MAKE ANY CHANGES TO YOUR HEATING SYSTEM UNTILL UNLESS YOU KNOW *"
 * WHAT YOU ARE DOING                                                    *"
+* Language support by Juraj Halcak :: juraj@halcak.sk :: 19.01.12       *"
 *************************************************************************"
 */
 
@@ -23,6 +24,7 @@ require_once(__DIR__.'/st_inc/session.php');
 confirm_logged_in();
 require_once(__DIR__.'/st_inc/connection.php');
 require_once(__DIR__.'/st_inc/functions.php');
+require_once(__DIR__.'/lang/sk.inc');
 
 if (isset($_POST['submit'])) {
 	$holidays_enable = isset($_POST['holidays_enable']) ? $_POST['holidays_enable'] : "0";
@@ -33,12 +35,12 @@ if (isset($_POST['submit'])) {
 	$end_date_time = $_POST['end_date_time'];
 	$etime = date('Y-m-d H:i:s',strtotime($end_date_time));
 
-	$sql_device_insert= "INSERT INTO holidays(active, start_date_time, end_date_time)values('{$holidays_enable}', '{$start_date_time}', '{$end_date_time}')";
+	$sql_device_insert= "INSERT INTO holidays(active, start_date_time, end_date_time) VALUES('{$holidays_enable}', '{$start_date_time}', '{$end_date_time}')";
 	$result = $conn->query($sql_device_insert);
 	
 	if ($result) {
 		// Success!
-		$message_success = "All Done";
+		$message_success = $LANG['all_done'];
 	} else {
 				// Display error message.
 		$error .= "<p>" . mysqli_error($conn) . "</p>";
@@ -50,15 +52,15 @@ if (isset($_POST['submit'])) {
 		$get_product = $conn->query($query);
 		$found_product = mysqli_fetch_array($get_product);
 		if (!$found_product) {
-			$error_message = "No record found for database record number " . $id .mysqli_error($conn);
+			$error_message = $LANG['no_rec_id'] . $id .mysqli_error($conn);
 		} else {		
 			$query = "DELETE FROM holidays WHERE id = {$id} LIMIT 1";
 			$result = $conn->query($query);
 			if ($result) {
 				// Success!
-				$message_success = "Record Delete Successfully";
+				$message_success = $LANG['rec_succ'];
 			} else {
-				$error = "<p>Something went wrong! please try again...</p>";
+				$error = "<p>".$LANG['s_wrong']."</p>";
 				$error .= "<p>" .mysqli_error($conn). "</p>";
 			}
 		}

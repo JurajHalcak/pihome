@@ -20,7 +20,7 @@
 */
 
 // weather table to get sunrise and sun set time 
-$query="select * from weather";
+$query="SELECT * FROM weather";
 $result = $conn->query($query);
 $weather_row = mysqli_fetch_array($result);
 $sunrise = $weather_row['sunrise']* 1000 ;
@@ -57,7 +57,7 @@ var dataset = [
 //background-color for boiler on time 
 var markings = [
 <?php
-$query="select start_datetime, stop_datetime from zone_log_view where (start_datetime > DATE_SUB( NOW(), INTERVAL 24 HOUR)) AND type='Heating' AND status= '1';";
+$query="SELECT start_datetime, stop_datetime FROM zone_log_view WHERE (start_datetime > DATE_SUB( NOW(), INTERVAL 24 HOUR)) AND type='Heating' AND status= '1';";
 $results = $conn->query($query);
 $count=mysqli_num_rows($results); 
 while ($row = mysqli_fetch_assoc($results)) {
@@ -82,14 +82,21 @@ $(document).ready(function () {
 
 <script type="text/javascript">
 var hot_water = <?php echo json_encode($hot_water); ?>;
-//var immersion_room = <?php echo json_encode($immersion_room); ?>;
-//var dataset_c = [{label: "Hot Water ", data: hot_water, color: "#0077FF"}, {label: "Immersion Room ", data: immersion_room, color: "#DE000F"} ];
-var dataset_c = [{label: "Hot Water ", data: hot_water, color: "#0077FF"}];
+var immersion_room = <?php echo json_encode($immersion_room); ?>;
+var immersion_room2 = <?php echo json_encode($immersion_room2); ?>;
+var immersion_room3 = <?php echo json_encode($immersion_room3); ?>;
+var immersion_room4 = <?php echo json_encode($immersion_room4); ?>;
+var dataset_c = [{label: "Hot Water ", data: hot_water, color: "#0077FF"}, 
+                {label: "Immersion Room ", data: immersion_room, color: "#DE000F"}, 
+                {label: "Immersion Room2 ", data: immersion_room2, color: "#EA000F"}, 
+                {label: "Immersion Room3 ", data: immersion_room3, color: "#DA000F"},
+                {label: "Immersion Room4 ", data: immersion_room3, color: "#D0000F"} ];
+//var dataset_c = [{label: "Hot Water ", data: hot_water, color: "#0077FF"}];
 
 //background-color for boiler on time 
 var markings_chwater = [
 <?php
-$query="select start_datetime, stop_datetime from zone_log_view where (start_datetime > DATE_SUB( NOW(), INTERVAL 24 HOUR)) AND type = 'Water' AND status= '1';";
+$query="SELECT start_datetime, stop_datetime FROM zone_log_view WHERE (start_datetime > DATE_SUB( NOW(), INTERVAL 24 HOUR)) AND type = 'Water' AND status= '1';";
 $results = $conn->query($query);
 $count=mysqli_num_rows($results); 
 while ($row = mysqli_fetch_assoc($results)) {
@@ -121,7 +128,7 @@ var dataset_hw = [{label: "CPU  ", data: system_c, color: "#DE000F"}];
 //background-color for All boiler on time 
 var markings_boiler = [
 <?php
-$query="select start_datetime, stop_datetime from zone_log_view where (start_datetime > DATE_SUB( NOW(), INTERVAL 24 HOUR));";
+$query="SELECT start_datetime, stop_datetime FROM zone_log_view WHERE (start_datetime > DATE_SUB( NOW(), INTERVAL 24 HOUR));";
 $results = $conn->query($query);
 $count=mysqli_num_rows($results); 
 while ($row = mysqli_fetch_assoc($results)) {
@@ -182,7 +189,7 @@ function showTooltip(x, y, color, contents) {
 
 <script type="text/javascript">
 function getMonthName(numericMonth) {
-    var monthArray = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+    var monthArray = ["Jan", "Feb", "Mar", "Apr", "M&aacute;j", "J&uacute;n", "J&uacute;l", "Aug", "Sep", "Okt", "Nov", "Dec"];
     var alphaMonth = monthArray[numericMonth];
     return alphaMonth;
 }

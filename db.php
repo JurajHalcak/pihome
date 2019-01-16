@@ -16,6 +16,7 @@
 * loss or damage to you or your property.                               *"
 * DO NOT MAKE ANY CHANGES TO YOUR HEATING SYSTEM UNTILL UNLESS YOU KNOW *"
 * WHAT YOU ARE DOING                                                    *"
+* Language support by Juraj Halcak :: juraj@halcak.sk :: 19.01.12       *"
 *************************************************************************"
 */
 
@@ -23,6 +24,7 @@ require_once(__DIR__.'/st_inc/session.php');
 confirm_logged_in();
 require_once(__DIR__.'/st_inc/connection.php');
 require_once(__DIR__.'/st_inc/functions.php');
+require_once(__DIR__.'/lang/sk.inc');
 
 $what = $_GET['w'];   # what to do, override, schedule, away etc..
 $opp =  $_GET['o'];   # insert, update, delete, ( active only device )
@@ -142,7 +144,7 @@ if($what=="override"){
 
 if($what=="boost"){
 	if($opp=="active"){
-		$query = "SELECT * FROM boost WHERE status = '1' limit 1;";
+		$query = "SELECT * FROM boost WHERE status = '1' LIMIT 1;";
 		$result = $conn->query($query);
 		$boost_row = mysqli_fetch_assoc($result);
 		$boost_status = $boost_row['status'];
@@ -185,7 +187,7 @@ if($what=="away"){
 //update frost temperature
 if($what=="frost"){
 	if($opp=="update"){
-			$query = "UPDATE frost_protection SET temperature = '{$frost_temp}', sync = 0 LIMIT 1";
+			$query = "UPDATE frost_protection SET temperature = '{$frost_temp}' LIMIT 1";
 			$conn->query($query);	
 	}
 }
@@ -193,25 +195,25 @@ if($what=="frost"){
 //Database Backup
 if($what=="db_backup"){
 	 shell_exec("php start_backup.php"); 
-	$info_message = "Data Base Backup Request Started, This process may take some time complete..." ;
+	$info_message = $LANG['bck_start'];
 }
 
 //Reboot System
 if($what=="reboot"){
 	exec("python /var/www/reboot.py"); 
-	$info_message = "Server is rebooting <small> Please Do not Refresh... </small>";
+	$info_message = $LANG['rbt_start'];
 }
 
 //Shutdown System
 if($what=="shutdown"){
 	exec("python /var/www/shutdown.py"); 
-	$info_message = "Server is Shutting down <small> Please Do not Refresh... </small>";
+	$info_message = $LANG['off_start'];
 }
 
 //Search for network gateway
 if($what=="find_gw"){
 	//shell_exec("nohup python /var/www/cron/find_mygw/find_mygw.py");
-	$query = "UPDATE gateway SET find_gw = '1' where status = 1;";
+	$query = "UPDATE gateway SET find_gw = '1' WHERE status = 1;";
 	$conn->query($query);
 }
 

@@ -23,7 +23,7 @@ require_once(__DIR__.'/st_inc/session.php');
 require_once(__DIR__.'/st_inc/connection.php');
 require_once(__DIR__.'/st_inc/functions.php');
  
-$query = "SELECT * FROM boost ORDER BY id asc";
+$query = "SELECT * FROM boost ORDER BY id ASC";
 $results = $conn->query($query);
 while ($row = mysqli_fetch_assoc($results)) {
 

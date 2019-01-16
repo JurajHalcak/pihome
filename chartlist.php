@@ -16,12 +16,14 @@
 * loss or damage to you or your property.                               *"
 * DO NOT MAKE ANY CHANGES TO YOUR HEATING SYSTEM UNTILL UNLESS YOU KNOW *"
 * WHAT YOU ARE DOING                                                    *"
+* Language support by Juraj Halcak :: juraj@halcak.sk :: 19.01.14       *"
 *************************************************************************"
 */
 
 $graphs_page = '1';
-echo "<h4>PiHome Temperature Graps</h4></p>Temperature Graps for last 12 hours for all Zone. </p>";
+echo "<h4>".$LANG['pihome_graphs_temp']."</h4></p>".$LANG['graphs_all_zone_24']."</p>";
 /*
+// od tade
 //query to get system table
 $query = "SELECT * FROM location where zone IS NOT NULL AND zone != '' ORDER BY index_id asc";
 $result = mysql_query($query, $connection);
@@ -31,16 +33,17 @@ $zone1 = $row['device'];
 $zone2 = $row['device'];
 $zone3 = $row['device'];
 $zone4 = $row['device'];
-*/
 
-/*
+
+
 function clean($string) {
    $string = str_replace(' ', '', $string); // Replaces all spaces with hyphens.
    $string = preg_replace('/[^A-Za-z0-9\-]/', '', $string); // Removes special chars.
 
    return preg_replace('/-+/', '-', $string); // Replaces multiple hyphens with single one.
 }
-
+*/
+/*
 
 $querya="select * from zone_view where `type` = 'Heating' order BY index_id asc;";
 $resulta = $conn->query($querya);
@@ -70,9 +73,10 @@ while ($row = mysqli_fetch_assoc($resulta)) {
 	//echo "</pre>";
 }
 
+// po tade
 */
 
-$query="select * from messages_in_view_24h where node_id= 21";
+$query="SELECT * FROM messages_in_view_24h WHERE node_id= 21";
 $result = $conn->query($query);
 //create array of pairs of x and y values
 while ($row = mysqli_fetch_assoc($result)) { 
@@ -81,7 +85,7 @@ while ($row = mysqli_fetch_assoc($result)) {
 
 
 //$arr_name='first_floor';
-$query="select * from messages_in_view_24h where node_id= 20";
+$query="SELECT * FROM messages_in_view_24h WHERE node_id= 20";
 $result = $conn->query($query);
 //create array of pairs of x and y values
 while ($row = mysqli_fetch_assoc($result)) { 
@@ -92,7 +96,7 @@ while ($row = mysqli_fetch_assoc($result)) {
 
 
 //weather temperature
-$query="select * from messages_in_view_24h where node_id= 1";
+$query="SELECT * FROM messages_in_view_24h WHERE node_id= 1";
 $result = $conn->query($query);
 //create array of pairs of x and y values
 $weather_c = array();
@@ -101,7 +105,7 @@ while ($row = mysqli_fetch_assoc($result)) {
 }
 
 //hot water temperature
-$query="select * from messages_in_view_24h where node_id= 30";
+$query="SELECT * FROM messages_in_view_24h WHERE node_id= 28-000008654787";
 $result = $conn->query($query);
 //create array of pairs of x and y values
 $hot_water = array();
@@ -109,20 +113,50 @@ while ($row = mysqli_fetch_assoc($result)) {
    $hot_water[] = array(strtotime($row['datetime']) * 1000, $row['payload']);
 }
 
-/*
+
 //No Temperature Sensors installed, if you have Temperature Sensors with ID 25 put it in Immersion Room and un-comment. 
 //hot water room
-$query="select * from messages_in_view_24h where node_id= 25";
+$query="SELECT * FROM messages_in_view_24h WHERE node_id= '28-000008654787'";
 $result = $conn->query($query);
 //create array of pairs of x and y values
 $immersion_room = array();
 while ($row = mysqli_fetch_assoc($result)) { 
    $immersion_room[] = array(strtotime($row['datetime']) * 1000, $row['payload']);
 }
-*/
+
+//No Temperature Sensors installed, if you have Temperature Sensors with ID 25 put it in Immersion Room and un-comment. 
+//hot water room
+$query="SELECT * FROM messages_in_view_24h WHERE node_id= '28-000009b324ab'";
+$result = $conn->query($query);
+//create array of pairs of x and y values
+$immersion_room2 = array();
+while ($row = mysqli_fetch_assoc($result)) { 
+   $immersion_room2[] = array(strtotime($row['datetime']) * 1000, $row['payload']);
+}
+
+//No Temperature Sensors installed, if you have Temperature Sensors with ID 25 put it in Immersion Room and un-comment. 
+//hot water room
+$query="SELECT * FROM messages_in_view_24h WHERE node_id= '28-000009b2edb8'";
+$result = $conn->query($query);
+//create array of pairs of x and y values
+$immersion_room3 = array();
+while ($row = mysqli_fetch_assoc($result)) { 
+   $immersion_room3[] = array(strtotime($row['datetime']) * 1000, $row['payload']);
+}
+
+//No Temperature Sensors installed, if you have Temperature Sensors with ID 25 put it in Immersion Room and un-comment. 
+//hot water room
+$query="SELECT * FROM messages_in_view_24h WHERE node_id= '28-000009b2eb37'";
+$result = $conn->query($query);
+//create array of pairs of x and y values
+$immersion_room4 = array();
+while ($row = mysqli_fetch_assoc($result)) { 
+   $immersion_room4[] = array(strtotime($row['datetime']) * 1000, $row['payload']);
+}
+
 
 //cpu temperature
-$query="select * from messages_in_view_24h where node_id= 0";
+$query="SELECT * FROM messages_in_view_24h WHERE node_id= 0";
 $result = $conn->query($query);
 //create array of pairs of x and y values
 $system_c = array();

@@ -21,7 +21,7 @@
 require_once(__DIR__.'/st_inc/connection.php');
 require_once(__DIR__.'/st_inc/functions.php');
 
-$backup_emailfrom='info@pihome.eu';
+$backup_emailfrom='halcak.juraj@datacomp.sk';
 
 //dump all mysql database and save as sql file
 $dumpfname = $dbname . "_" . date("Y-m-d_H-i-s").".sql";
@@ -29,7 +29,8 @@ $command = "mysqldump --ignore-table=$dbname.backup --add-drop-table --host=$hos
 if ($dbpassword)
         $command.= "--password=". $dbpassword ." ";
 $command.= $dbname;
-$command.= " > " . $dumpfname;
+$command.= " > /home/pi/" . $dumpfname;
+echo "Prikaz: ".$command."<br>";
 shell_exec($command);
 
 // compress sql file and unlink (delete) sql file after creating zip file. 

@@ -33,7 +33,7 @@ function clean($string) {
 }
 
 
-$querya="select * from zone_view where `type` = 'Heating' order BY index_id asc;";
+$querya="SELECT * FROM zone_view where `type` = 'Kúrenie' ORDER BY index_id ASC;";
 $resulta = $conn->query($querya);
 while ($row = mysqli_fetch_assoc($resulta)) {
 	$zone_id=$row['id'];
@@ -49,7 +49,7 @@ while ($row = mysqli_fetch_assoc($resulta)) {
 	$zone_gpio_pin=$row['gpio_pin'];	
 	//echo $zone_name;
 	
-	$query="select * from messages_in_view_24h where node_id = {$zone_sensor_id};";
+	$query="SELECT * FROM messages_in_view_24h WHERE node_id = {$zone_sensor_id};";
 	$result = $conn->query($query);
 	//create array of pairs of x and y values
 	$zone_name = array();

@@ -16,6 +16,7 @@
 * loss or damage to you or your property.                               *"
 * DO NOT MAKE ANY CHANGES TO YOUR HEATING SYSTEM UNTILL UNLESS YOU KNOW *"
 * WHAT YOU ARE DOING                                                    *"
+* Language support by Juraj Halcak :: juraj@halcak.sk :: 19.01.15       *"
 *************************************************************************"
 */
 require_once(__DIR__.'/st_inc/session.php');
@@ -32,11 +33,11 @@ require_once(__DIR__.'/st_inc/functions.php');
 	if (isset($_POST['submit'])) { // Form has been submitted.
 		// perform validations on the form data
 		if ((!isset($_POST['new_pass'])) || (empty($_POST['new_pass']))) {
-			$error_message = "New Password is empty.";
+			$error_message = $LANG['pass_empty'];
 		} elseif((!isset($_POST['con_pass'])) || (empty($_POST['con_pass']))) {
-			$error_message = "Confirm password is empty.";
+			$error_message = $LANG['conf_empty'];
 		} elseif($_POST['new_pass'] != $_POST['con_pass']) {
-			$error_message = "Password Confirmation failed. New Password and Confirm Password must be same.";
+			$error_message = $LANG['pass_conf_fail'];
 		}
 
 		$new_pass = mysqli_real_escape_string($conn,(md5($_POST['new_pass'])));
@@ -47,9 +48,9 @@ require_once(__DIR__.'/st_inc/functions.php');
 					$result = mysql_query($query, $connection);
 					if ($result) {
 						// Success!
-						$message_success = "Password is successfully changed.";
+						$message_success = $LANG['pass_changed_ok'];
 						header("Refresh: 3; url=settings.php");
-					} else {$error = "<p>Password chaneg failed.</p> <p>".mysqli_error($conn)."</p>";}
+					} else {$error = "<p>".$LANG['pass_changed_fail']."</p> <p>".mysqli_error($conn)."</p>";}
 		} 
 
 		}
@@ -65,29 +66,29 @@ $row = mysqli_fetch_assoc($results);
                 <div class="col-lg-12">
                     <div class="panel panel-primary">
                         <div class="panel-heading">
-                            <i class="fa fa-cog fa-fw"></i>   Settings    
+                            <i class="fa fa-cog fa-fw"></i>   <?php echo $LANG['settings']; ?>    
 						<div class="pull-right"> <div class="btn-group"><?php echo date("H:i"); ?></div> </div>
                         </div>
                         <!-- /.panel-heading -->
                         <div class="panel-body">
 						
-				<p > Please enter your password details below. Fields with * are required. </p> 
+				<p > <?php echo $LANG['pass_detail'].$LANG['fields_req']; ?> </p> 
                 <form class="international" method="post" action="<?php $PHP_SELF ?>" id="form-join" name="addproduct">
-				<div class="form-group"><label>Full Name</label>
-                <input type="text" class="form-control" placeholder="Full Name" value="<?php echo $row['fullname'] ;?>" disabled> 
+				<div class="form-group"><label><?php echo $LANG['fullname'];?></label>
+                <input type="text" class="form-control" placeholder="<?php $LANG['fullname'];?>" value="<?php echo $row['fullname'] ;?>" disabled> 
                 </div>
-                <div class="form-group"><label>Username</label>
-                <input type="text" class="form-control" placeholder="User Name" value="<?php echo $row['username'] ;?>" disabled> 
+                <div class="form-group"><label><?php echo $LANG['username'];?></label>
+                <input type="text" class="form-control" placeholder="<?php echo $LANG['username'];?>" value="<?php echo $row['username'] ;?>" disabled> 
                 </div>
 				
-                <div class="form-group"><label>New Password</label>
-                <input type="password" class="form-control" placeholder="Enter New Password" value="" id="new_pass" name="new_pass" autofocus> 
+                <div class="form-group"><label><?php echo $LANG['new_password'];?></label>
+                <input type="password" class="form-control" placeholder="<?php echo $LANG['new_password'];?>" value="" id="new_pass" name="new_pass" autofocus> 
                 </div>
-                <div class="form-group"><label>Confirm Password</label>
-                <input type="password" class="form-control" placeholder="Enter Confirm New Password" value="" id="con_pass" name="con_pass" > 
+                <div class="form-group"><label><?php echo $LANG['confirm_password'];?></label>
+                <input type="password" class="form-control" placeholder="<?php echo $LANG['confirm_password'];?>" value="" id="con_pass" name="con_pass" > 
                 </div>				
-				<INPUT type="button" VALUE="Cancel" onClick="history.go(-1)" class="btn btn-primary btn-sm">
-                <input type="submit" name="submit" value="submit" class="btn btn-default btn-sm">
+				<INPUT type="button" VALUE="<?php echo $LANG['cancel'];?>" onClick="history.go(-1)" class="btn btn-primary btn-sm">
+                <input type="submit" name="submit" value="<?php echo $LANG['submit'];?>" class="btn btn-default btn-sm">
 
                 </form>
                         </div>
@@ -95,14 +96,8 @@ $row = mysqli_fetch_assoc($results);
 						<div class="panel-footer">
 
 <?php 
-$query="select * from weather";
-$result = $conn->query($query);
-$weather = mysqli_fetch_array($result);
+ShowWeather($conn);
 ?>
-Outside: <?php //$weather = getWeather(); ?><?php echo $weather['c'] ;?>&deg;C
-<span><img border="0" width="24" src="images/<?php echo $weather['img'];?>.png" title="<?php echo $weather['title'];?> - 
-<?php echo $weather['description'];?>"></span> <span><?php echo $weather['title'];?> - 
-<?php echo $weather['description'];?></span>
                         </div>
                     </div>
                 </div>

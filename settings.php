@@ -16,6 +16,7 @@
 * loss or damage to you or your property.                               *"
 * DO NOT MAKE ANY CHANGES TO YOUR HEATING SYSTEM UNTILL UNLESS YOU KNOW *"
 * WHAT YOU ARE DOING                                                    *"
+* Language support by Juraj Halcak :: juraj@halcak.sk :: 19.01.14       *"
 *************************************************************************"
 */
 
@@ -23,33 +24,34 @@ require_once(__DIR__.'/st_inc/session.php');
 confirm_logged_in();
 require_once(__DIR__.'/st_inc/connection.php');
 require_once(__DIR__.'/st_inc/functions.php');
+require_once(__DIR__.'/lang/sk.inc');
 
 if(isset($_GET["frost"])) {
 	$frost_temp = $_GET['frost'];
-	$info_message = "Frost Protection Temperature Changed to $frost_temp&deg;";
+	$info_message = $LANG['frost_change'].$frost_temp."&deg;";
 }
 if(isset($_GET["reboot"])) {
-	$info_message = "Server is Rebooting <small> Please Do not Refresh... </small>";
+	$info_message = $LANG['rbt_start'];
 }
 if(isset($_GET["shutdown"])) {
-	$info_message = "Server is Shutting down <small> Please Do not Refresh... </small>";
+	$info_message = $LANG['off_start'];
 }
 
 if(isset($_GET["del_user"])) {
-	$info_message = "User account removed successfully...</small>";
+	$info_message = $LANG['account_rem'];
 }
 
 if(isset($_GET["zone_deleted"])) {
-	$info_message = "Zone records removed successfully...</small>";
+	$info_message = $LANG['zone_rem'];
 }
 
-if(isset($_GET["find_gw"])) {
-	$info_message = "Searching for PiHome Netwotk gateway on your local network <small> Please Do not Refresh... </small>";
+if(isset($_GET["zone_deleted"])) {
+	$info_message = $LANG['search_gw'];
 }
 
 //backup process start
- if(isset($_GET['db_backup'])) {
-$info_message = "Data Base Backup Request Started, This process may take some time complete..." ;
+ if(isset($_GET["db_backup"])) {
+$info_message = $LANG['bck_start'] ;
 include("start_backup.php");
  }
 //query to frost protection temperature 
@@ -65,7 +67,7 @@ $frost_temp = $frosttemp['temperature'];
             <div class="row">
                 <div class="col-lg-12">
                   	<div id="settingslist" >
-				   <div class="text-center"><br><br><p>Please wait while system grab latest information from database...</p>
+				   <div class="text-center"><br><br><p><?php echo $LANG['wait_sys_db']; ?>(Info 03)</p>
 				   <br><br><img src="images/loader.gif">
 				   </div>
 				   </div>

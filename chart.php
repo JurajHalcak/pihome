@@ -16,6 +16,7 @@
 * loss or damage to you or your property.                               *"
 * DO NOT MAKE ANY CHANGES TO YOUR HEATING SYSTEM UNTILL UNLESS YOU KNOW *"
 * WHAT YOU ARE DOING                                                    *"
+* Language support by Juraj Halcak :: juraj@halcak.sk :: 19.01.14       *"
 *************************************************************************"
 */
 
@@ -23,6 +24,7 @@ require_once(__DIR__.'/st_inc/session.php');
 confirm_logged_in();
 require_once(__DIR__.'/st_inc/connection.php');
 require_once(__DIR__.'/st_inc/functions.php');
+require_once(__DIR__.'/lang/sk.inc');
 ?>
 <?php include("header.php"); ?>
         <div id="page-wrapper">
@@ -31,7 +33,7 @@ require_once(__DIR__.'/st_inc/functions.php');
                 <div class="col-lg-12">
 				                    <div class="panel panel-primary">
                         <div class="panel-heading">
-                            <i class="fa fa-bar-chart fa-fw"></i> Graphs   
+                            <i class="fa fa-bar-chart fa-fw"></i> <?php echo $LANG['graphs']; ?>   
 						<div class="pull-right"> <div class="btn-group"><?php echo date("H:i"); ?></div> </div>
                         </div>
                         <!-- /.panel-heading -->
@@ -52,14 +54,8 @@ require_once(__DIR__.'/st_inc/functions.php');
                        <!-- /.panel-body -->
 						<div class="panel-footer">
 <?php 
-$query="select * from weather";
-$result = $conn->query($query);
-$weather = mysqli_fetch_array($result);
+ShowWeather($conn);
 ?>
-<?php //$weather = getWeather(); ?><?php echo $weather['c'] ;?>&deg;C
-<span><img border="0" width="24" src="images/<?php echo $weather['img'];?>.png" title="<?php echo $weather['title'];?> - 
-<?php echo $weather['description'];?>"></span> <span><?php echo $weather['title'];?> - 
-<?php echo $weather['description'];?></span>
                         </div>
                     </div>
                 </div>

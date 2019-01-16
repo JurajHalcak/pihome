@@ -16,6 +16,7 @@
 * loss or damage to you or your property.                               *"
 * DO NOT MAKE ANY CHANGES TO YOUR HEATING SYSTEM UNTILL UNLESS YOU KNOW *"
 * WHAT YOU ARE DOING                                                    *"
+* Language support by Juraj Halcak :: juraj@halcak.sk :: 19.01.14       *"
 *************************************************************************"
 */
 require_once(__DIR__.'/st_inc/session.php'); 
@@ -27,9 +28,9 @@ if (isset($_POST['submit'])) {
 	$sc_en = isset($_POST['sc_en']) ? $_POST['sc_en'] : "0";
 	$start_time = $_POST['start_time'];
 	$end_time = $_POST['end_time'];
-	$query = "UPDATE schedule_night_climate_time SET sync = '0', status = '{$sc_en}', start_time = '{$start_time}', end_time = '{$end_time}' where id = 1;";
+	$query = "UPDATE schedule_night_climate_time SET sync = '0', status = '{$sc_en}', start_time = '{$start_time}', end_time = '{$end_time}' WHERE id = 1;";
 	$timeresults = $conn->query($query);
-	if ($timeresults) {$message_success = "Night Climate Time Changed Successfully!!!";} else {$error = "<p>Night Climate Changes Failed with error </p>"; $error .= "<p>".mysqli_error($conn). "</p>";}
+	if ($timeresults) {$message_success = $LANG['n_clima_suc']."I01";} else {$error = "<p>".$LANG['n_clima_fail']."</p>"; $error .= "<p>".mysqli_error($conn). "</p>";}
 	
 	foreach($_POST['id'] as $id){
 		$id = $_POST['id'][$id];
@@ -40,7 +41,7 @@ if (isset($_POST['submit'])) {
 		$query = "UPDATE schedule_night_climat_zone SET sync = '0', status='$status', min_temperature='$min', max_temperature='$max' WHERE id='$id'";
 		$zoneresults = $conn->query($query);
 	}
-	$message_success = "Night Climate Schedule Modified Successfully!!!";
+	$message_success = $LANG['n_clima_suc']."I02";
 	header("Refresh: 3; url=home.php");
 } ?>
 <?php include("header.php");  ?>
@@ -51,7 +52,7 @@ if (isset($_POST['submit'])) {
                 <div class="col-lg-12">
                    <div class="panel panel-primary">
                         <div class="panel-heading">
-                            <i class="fa fa-bed fa-1x"></i> Night Climate
+                            <i class="fa fa-bed fa-1x"></i> <?php echo $LANG['n_clima']; ?>
 						<div class="pull-right"> <div class="btn-group"><?php echo date("H:i"); ?></div> </div>
                         </div>
                         <!-- /.panel-heading -->
@@ -64,39 +65,39 @@ if (isset($_POST['submit'])) {
 ?>
 				<div class="checkbox checkbox-default checkbox-circle">
                 <input id="checkbox0" class="styled" type="checkbox" name="sc_en" value="1" <?php $check = ($snct['status'] == 1) ? 'checked' : ''; echo $check; ?>>
-                <label for="checkbox0"> Enable Night Climate </label>
+                <label for="checkbox0"><?php echo $LANG['n_clima_on']; ?></label>
                 <div class="help-block with-errors"></div></div>
 
-				<div class="form-group" class="control-label"><label>Start Time</label>
+				<div class="form-group" class="control-label"><label><?php echo $LANG['n_clima_start']; ?></label>
 				<input class="form-control input-sm" type="time" id="start_time" name="start_time" value="<?php if(isset($_POST['start_time'])) { echo $_POST['start_time']; }else{echo $snct['start_time'];} ?>" required>
                 <div class="help-block with-errors"></div></div>
 				
-				<div class="form-group" class="control-label"><label>End Time</label>
+				<div class="form-group" class="control-label"><label><?php echo $LANG['n_clima_end']; ?></label>
 				<input class="form-control input-sm" type="time" id="end_time" name="end_time" value="<?php if(isset($_POST['end_time'])) { echo $_POST['end_time']; }else{echo $snct['end_time'];} ?>" required>
                 <div class="help-block with-errors"></div></div>				
 <?php
 $zquery = "
 SELECT sncz.id, sncz.status, sncz.schedule_night_climate_id, sncz.zone_id, zone.index_id, zone.name as zone_name, zone.status as zone_status, sncz.min_temperature, sncz.max_temperature 
 FROM schedule_night_climat_zone sncz 
-join zone on sncz.zone_id = zone.id
-where zone.status = 1 order by zone.index_id;";
+JOIN zone ON sncz.zone_id = zone.id
+WHERE zone.status = 1 ORDER BY zone.index_id;";
 				$zoneresults = $conn->query($zquery);
 				while ($sncz = mysqli_fetch_assoc($zoneresults)) {
 ?>
 				<input type="hidden" name="id[<?php echo $sncz["id"];?>]" value="<?php echo $sncz["id"];?>">
 
 				<div class="checkbox checkbox-default  checkbox-circle">
-				<input id="checkbox<?php echo $sncz["id"];?>" class="styled" type="checkbox" name="status[<?php echo $sncz["id"];?>]" value="1" <?php $check = ($sncz['status'] == 1) ? 'checked' : ''; echo $check; ?> onclick="$('#<?php echo $sncz["id"];?>').toggle();">
+				<input id="checkbox<?php echo $sncz["id"];?>" class="styled" type="checkbox" name="status[<?php echo $sncz["id"];?>]" value="1" <?php $check = ($sncz['status'] == 1) ? "checked" : ""; echo $check; ?> onclick="$('#<?php echo $sncz["id"];?>').toggle();">
                 <label for="checkbox<?php echo $sncz["id"];?>"><?php echo $sncz["zone_name"];?></label>
                 <div class="help-block with-errors"></div></div>
 				
 				<?php 
-				if($sncz['status'] == 1){echo '<div id="'.$sncz["id"].'"><div class="form-group" class="control-label">';
+				if($sncz['status'] == 1){echo "<div id=\"".$sncz["id"]."\"><div class=\"form-group\" class=\"control-label\">";
 					}else{
-					echo '<div id="'.$sncz["id"].'" style="display:none !important;"><div class="form-group" class="control-label">';}
+					echo "<div id=\"".$sncz["id"]."\" style=\"display:none !important;\"><div class=\"form-group\" class=\"control-label\">";}
 				?>
-				<label>Minimum Temperature</label>
-				<select class="form-control input-sm" type="number" id="<?php echo $sncz["id"];?>" name="min[<?php echo $sncz["id"];?>]" placeholder="Zone Temperature" >
+				<label><?php echo $LANG['n_clima_min']; ?></label>
+				<select class="form-control input-sm" type="number" id="<?php echo $sncz["id"];?>" name="min[<?php echo $sncz["id"];?>]" placeholder="<?php echo $LANG['zone_temp']; ?>" >
 				<option selected ><?php echo $sncz["min_temperature"];?></option>
 				<option>18</option>
 				<option>19</option>
@@ -107,8 +108,8 @@ where zone.status = 1 order by zone.index_id;";
 				</select>
                 <div class="help-block with-errors"></div>
 				
-				<label>Maximum Temperature</label>
-				<select class="form-control input-sm" type="number" id="<?php echo $sncz["id"];?>" name="max[<?php echo $sncz["id"];?>]" placeholder="Zone Temperature" >
+				<label><?php echo $LANG['n_clima_max']; ?></label>
+				<select class="form-control input-sm" type="number" id="<?php echo $sncz["id"];?>" name="max[<?php echo $sncz["id"];?>]" placeholder="<?php echo $LANG['zone_temp']; ?>" >
 				<option selected ><?php echo $sncz["max_temperature"];?></option>
 				<option>18</option>
 				<option>19</option>
@@ -121,21 +122,15 @@ where zone.status = 1 order by zone.index_id;";
 				
 				</div></div>
 				<?php }?>			
-                <input type="submit" name="submit" value="Submit" class="btn btn-default btn-sm">
-				<a href="home.php"><button type="button" class="btn btn-primary btn-sm">Cancel</button></a>
+                <input type="submit" name="submit" value="<?php echo $LANG['submit']; ?>" class="btn btn-default btn-sm">
+				<a href="home.php"><button type="button" class="btn btn-primary btn-sm"><?php echo $LANG['cancel']; ?></button></a>
 				</form>
                         </div>
                         <!-- /.panel-body -->
 						<div class="panel-footer">
 <?php 
-$query="select * from weather";
-$result = $conn->query($query);
-$weather = mysqli_fetch_array($result);
+ShowWeather($conn);
 ?>
-Outside: <?php //$weather = getWeather(); ?><?php echo $weather['c'] ;?>&deg;C
-<span><img border="0" width="24" src="images/<?php echo $weather['img'];?>.png" title="<?php echo $weather['title'];?> - 
-<?php echo $weather['description'];?>"></span> <span><?php echo $weather['title'];?> - 
-<?php echo $weather['description'];?></span>
                             <div class="pull-right">
                                 <div class="btn-group">
                                 </div>

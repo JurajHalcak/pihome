@@ -16,7 +16,6 @@
 * loss or damage to you or your property.                               *"
 * DO NOT MAKE ANY CHANGES TO YOUR HEATING SYSTEM UNTILL UNLESS YOU KNOW *"
 * WHAT YOU ARE DOING                                                    *"
-* Language support by Juraj Halcak :: juraj@halcak.sk :: 19.01.14       *"
 *************************************************************************"
 */
 
@@ -24,17 +23,16 @@ require_once(__DIR__.'/st_inc/session.php');
 confirm_logged_in();
 require_once(__DIR__.'/st_inc/connection.php');
 require_once(__DIR__.'/st_inc/functions.php');
-require_once(__DIR__.'/lang/sk.inc');
 ?>
 <div class="panel panel-primary">
                         <div class="panel-heading">
-                            <div class="Light"><i class="fa fa-home fa-fw"></i> <?php echo $LANG['home']; ?>
+                            <div class="Light"><i class="fa fa-home fa-fw"></i> Home
 						<div class="pull-right"> <div class="btn-group"><?php echo date("H:i"); ?></div> </div>
                         </div></div>
                         <!-- /.panel-heading -->
                         <div class="panel-body">
 							<a style="color: #777; cursor: pointer; text-decoration: none;" data-toggle="collapse" data-parent="#accordion" href="#collapseone">
-							<button class="btn btn-default btn-circle btn-xxl mainbtn animated fadeIn"><h3 class="Light"><small><?php echo $LANG['one_touch']; ?></small><br><i class="fa fa-bullseye fa-2x"></i></h3>
+							<button class="btn btn-default btn-circle btn-xxl mainbtn animated fadeIn"><h3 class="Light"><small>One Touch</small><br><i class="fa fa-bullseye fa-2x"></i></h3>
 							<br>
 							</button></a>
 <?php 
@@ -48,17 +46,13 @@ $frost_c = $frost_q['temperature'];
 $boost_index = '0';
 $override_index = '0';
 
-//following variable set to current day of the week.
-$dow = idate('w');
-// echo "Dnesny den: ".$dow."</br>";
-
-//query to check away status
+//query to check away status 
 $query = "SELECT * FROM away LIMIT 1";
 $result = $conn->query($query);
 $away = mysqli_fetch_array($result);
 $away_active = $away['status'];
 
-$query = "SELECT * FROM zone where zone.purge = '0' ORDER BY index_id ASC; ";
+$query = "SELECT * FROM zone where zone.purge = '0' ORDER BY index_id asc; ";
 $results = $conn->query($query);
 while ($row = mysqli_fetch_assoc($results)) {
 	$max_room_c=$row['max_c'];
@@ -75,13 +69,13 @@ while ($row = mysqli_fetch_assoc($results)) {
 	
 	//query to get temperature from table with sensor id 
 	//$query = "SELECT * FROM messages_in WHERE node_id = '{$sensor_id}' ORDER BY id desc LIMIT 1 ";
-	$query = "SELECT * FROM messages_in WHERE node_id = '{$sensor_id}' AND child_id = '{$sensor_child_id}' ORDER BY id DESC LIMIT 1 ";
+	$query = "SELECT * FROM messages_in WHERE node_id = '{$sensor_id}' AND child_id = '{$sensor_child_id}' ORDER BY id desc LIMIT 1 ";
 	$result = $conn->query($query);
 	$roomtemp = mysqli_fetch_array($result);
 	$room_c = $roomtemp['payload'];	
 	
 	//query to get schedule and temperature from table 
-	$query = "SELECT * FROM schedule_daily_time_zone_view WHERE CURTIME() BETWEEN start AND end AND zone_id = {$row['id']} AND tz_status = '1' AND (WeekDays & (1 << {$dow})) > 0 LIMIT 1";
+	$query = "SELECT * FROM schedule_daily_time_zone_view WHERE CURTIME() between start AND end AND zone_id = {$row['id']} AND tz_status = '1' LIMIT 1";
 	$sch_results = $conn->query($query);
 	$schedule = mysqli_fetch_array($sch_results);
 	$zone_status = $schedule['tz_status'];
@@ -187,38 +181,37 @@ while ($row = mysqli_fetch_assoc($results)) {
 	$override_arr[$override_index] = $ovactive;
 	$override_index = $override_index+1;
 
-	echo " <button class=\"btn btn-default btn-circle btn-xxl mainbtn animated fadeIn\" data-href=\"#\" data-toggle=\"modal\" data-target=\"#".$row['type']."".$row['id']."\" data-backdrop=\"static\" data-keyboard=\"false\">
-	<h3><small>".$row['name']."</small></h3>
-	<h3 class=\"degre\">".number_format($room_c,1)."&deg;</h3>
-	<h3 class=\"status\"><small style=\"color:".$status.";\"><i class=\"fa fa-circle fa-fw zone-status\"></i></small>";
-	echo " <small class=\"statusdegree\">"; 
-	if((isset($target_c)) AND $target_c > 0 AND $away_active =="0") {echo $target_c."&deg;";} 
-	if ($room_c >= $max_room_c && $away_active =='0'){echo "</small><small style=\"margin-left: 24px;\" class=\"zoonstatus\">";}
-	if ($room_c < $frost_c && $room_c < $max_room_c){echo "</small><small style=\"margin-left: 20px;\" class=\"zoonstatus\">";}
-	if($away_active=="1"){echo "</small><small style=\"margin-left: 48px;\" class=\"zoonstatus\">";}else {echo "</small><small class=\"zoonstatus\">"; }
-	if($room_c > $max_room_c && $away_active=="0"){echo " <i style=\"color:#dc0000;\" class=\"fa ".$shactive." fa-fw\"></i></small></h3></button>";} else {echo " <i class=\"fa ".$shactive." fa-fw\"></i></small></h3></button>";}
+	echo ' <button class="btn btn-default btn-circle btn-xxl mainbtn animated fadeIn" data-href="#" data-toggle="modal" data-target="#'.$row['type'].''.$row['id'].'" data-backdrop="static" data-keyboard="false">
+	<h3><small>'.$row['name'].'</small></h3>
+	<h3 class="degre">'.number_format($room_c,1).'&deg;</h3>
+	<h3 class="status"><small style="color:'.$status.';"><i class="fa fa-circle fa-fw zone-status"></i></small>';
+	echo ' <small class="statusdegree">'; 
+	if((isset($target_c)) AND $target_c > 0 AND $away_active =='0') {echo $target_c.'&deg;';} 
+	if ($room_c >= $max_room_c && $away_active =='0'){echo '</small><small style="margin-left: 24px;" class="zoonstatus">';}
+	if ($room_c < $frost_c && $room_c < $max_room_c){echo '</small><small style="margin-left: 20px;" class="zoonstatus">';}
+	if($away_active=="1"){echo '</small><small style="margin-left: 48px;" class="zoonstatus">';}else {echo '</small><small class="zoonstatus">'; }
+	if($room_c > $max_room_c && $away_active=="0"){echo ' <i style="color:#dc0000;" class="fa '.$shactive.' fa-fw"></i></small></h3></button>';} else {echo ' <i class="fa '.$shactive.' fa-fw"></i></small></h3></button>';}
 
 	
 
 	//Zone Schedule listing model
-	echo "<div class=\"modal fade\" id=\"".$row['type']."".$row['id']."\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"myModalLabel\" aria-hidden=\"true\">
-    <div class=\"modal-dialog\">
-	<div class=\"modal-content\">
-	<div class=\"modal-header\">
-	<button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-hidden=\"true\">x</button>
-	<h5 class=\"modal-title\">".$row['name'].$LANG['act_today']."</h5>
+	echo '<div class="modal fade" id="'.$row['type'].''.$row['id'].'" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+	<div class="modal-content">
+	<div class="modal-header">
+	<button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
+	<h5 class="modal-title">'.$row['name'].' - Active Schedule </h5>
 	</div>
-	<div class=\"modal-body\">";
-	$squery = "SELECT * FROM schedule_daily_time_zone_view where zone_id ='{$row['id']}' AND tz_status = 1  AND (WeekDays & (1 << {$dow})) > 0 ORDER BY start ASC";
-	//$squery = "SELECT * FROM schedule_daily_time_zone_view where zone_id ='{$row['id']}' AND tz_status = 1  AND (WeekDays & (1 << {$dow})) > ORDER BY start asc";
+	<div class="modal-body">';
+	$squery = "SELECT * FROM schedule_daily_time_zone_view where zone_id ='{$row['id']}' AND tz_status = 1 ORDER BY start asc";
 	$sresults = $conn->query($squery);
 	if (mysqli_num_rows($sresults) == 0){
-		echo "<div class=\"list-group\"><a href=\"#\" class=\"list-group-item\"><i class=\"fa fa-exclamation-triangle red\"></i>&nbsp;&nbsp;".$LANG['noact_today'].$row['name'].$LANG['exclam_3']."</a>";
+		echo '<div class=\"list-group\"><a href="#" class="list-group-item"><i class="fa fa-exclamation-triangle red"></i>&nbsp;&nbsp;No Schedule Found for '.$row['name'].'!!! </a>';
 	} else {
-		//echo '<h4>'.mysqli_num_rows($sresults).' Schedule Records.</h4>';
-		echo "<p>".$LANG['deact_today']."</p>
-		<br />
-		<div class=\"list-group\">" ;
+		echo '<h4>'.mysqli_num_rows($sresults).' Schedule Records found.</h4>
+		<p>You can Disable Schedule by clicking on temperature circle.</p>
+		<br>
+		<div class=\"list-group\">' ;
 		while ($srow = mysqli_fetch_assoc($sresults)) {
 			$shactive="orangesch_list";
 			$time = strtotime(date("G:i:s")); 
@@ -226,13 +219,13 @@ while ($row = mysqli_fetch_assoc($results)) {
 			$end_time = strtotime($srow['end']);
 			if ($time >$start_time && $time <$end_time){$shactive="redsch_list";}
 			//this line to pass unique argument  "?w=schedule_list&o=active&wid=" href="javascript:delete_schedule('.$srow["id"].');"
-			echo " <a href=\"javascript:schedule_zone(".$srow['tz_id'].");\" class=\"list-group-item\">
-			<div class=\"circle_list ". $shactive."\"> <p class=\"schdegree\">".$srow['temperature']."&deg;</p></div>
-			<span class=\"pull-right text-muted sch_list\"><em>". $srow['start']." - " .$srow['end']."</em></span></a>";
+			echo ' <a href="javascript:schedule_zone('.$srow['tz_id'].');" class="list-group-item">
+			<div class="circle_list '. $shactive.'"> <p class="schdegree">'.$srow['temperature'].'&deg;</p></div>
+			<span class="pull-right text-muted sch_list"><em>'. $srow['start'].' - ' .$srow['end'].'</em></span></a>';
 		}
 	}
-	echo "</div></div><div class=\"modal-footer\"><button type=\"button\" class=\"btn btn-default btn-sm\" data-dismiss=\"modal\">".$LANG['close']."</button>
-	</div></div></div></div>";				
+	echo '</div></div><div class="modal-footer"><button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Close</button>
+	</div></div></div></div>';				
 						
 //end of while loop	<a href="javascript:active_away();">
 }
@@ -241,7 +234,7 @@ while ($row = mysqli_fetch_assoc($results)) {
 //BOILER BUTTON 
 
 //query to get last boiler statues change time
-$query = "SELECT * FROM boiler_logs ORDER BY id DESC LIMIT 1 ";
+$query = "SELECT * FROM boiler_logs ORDER BY id desc LIMIT 1 ";
 $result = $conn->query($query);
 $boiler_onoff = mysqli_fetch_array($result);
 $boiler_last_off = $boiler_onoff['stop_datetime'];
@@ -264,41 +257,41 @@ if (isset($boiler_last_off)){
 	if ($boiler_hysteresis_time > $now){$hysteresis='1';}
 } else {$hysteresis='0';}
 
-if ($fired_status=="1"){$boiler_colour="red";} elseif ($fired_status=="0"){$boiler_colour="blue";}
-echo "	<button class=\"btn btn-default btn-circle btn-xxl mainbtn animated fadeIn\" data-toggle=\"modal\" href=\"#boiler\" data-backdrop=\"static\" data-keyboard=\"false\">
-		<h3 class=\"text-info\"><small>".$boiler_name."</small></h3>
-		<h3 class=\"degre\" ><i class=\"ionicons ion-flame fa-1x ".$boiler_colour."\"></i></h3>";
-if($hysteresis=="0") {echo"<h3 class=\"status\"><small class=\"statusdegree\"></small><small style=\"margin-left: 48px;\" class=\"zoonstatus\"></small>";}
-if($hysteresis=="1") {echo"<h3 class=\"status\"><small class=\"statusdegree\"></small><small style=\"margin-left: 70px;\" class=\"zoonstatus\"><i class=\"fa fa-hourglass fa-1x orange\"></i> </small>";}
-echo "</h3></button>";
+if ($fired_status=='1'){$boiler_colour="red";} elseif ($fired_status=='0'){$boiler_colour="blue";}
+echo '	<button class="btn btn-default btn-circle btn-xxl mainbtn animated fadeIn" data-toggle="modal" href="#boiler" data-backdrop="static" data-keyboard="false">
+		<h3 class="text-info"><small>'.$boiler_name.'</small></h3>
+		<h3 class="degre" ><i class="ionicons ion-flame fa-1x '.$boiler_colour.'"></i></h3>';
+if($hysteresis=='0') { echo'<h3 class="status"><small class="statusdegree"></small><small style="margin-left: 48px;" class="zoonstatus"></small>';}
+if($hysteresis=='1') {echo'<h3 class="status"><small class="statusdegree"></small><small style="margin-left: 70px;" class="zoonstatus"><i class="fa fa-hourglass fa-1x orange"></i> </small>';}
+echo '</h3></button>';
 
 
 	//Boiler Last 5 Status Logs listing model
-	echo "<div class=\"modal fade\" id=\"boiler\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"myModalLabel\" aria-hidden=\"true\">
-    <div class=\"modal-dialog\">
-	<div class=\"modal-content\">
-	<div class=\"modal-header\">
-	<button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-hidden=\"true\">x</button>
-	<h5 class=\"modal-title\">".$boiler_name." - ".$LANG['recent_logs']." </h5>
+	echo '<div class="modal fade" id="boiler" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+	<div class="modal-content">
+	<div class="modal-header">
+	<button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
+	<h5 class="modal-title">'.$boiler_name.' - Recent Logs </h5>
 	</div>
-	<div class=\"modal-body\">";
+	<div class="modal-body">';
 	
-	$bquery = "SELECT DATE_FORMAT(start_datetime, '%H:%i') AS start_datetime, DATE_FORMAT(stop_datetime, '%H:%i') AS stop_datetime , DATE_FORMAT(expected_end_date_time, '%H:%i') AS expected_end_date_time, TIMESTAMPDIFF(MINUTE, start_datetime, stop_datetime) AS on_minuts
-	FROM boiler_logs ORDER BY id DESC LIMIT 5";
+	$bquery = "select DATE_FORMAT(start_datetime, '%H:%i') as start_datetime, DATE_FORMAT(stop_datetime, '%H:%i') as stop_datetime , DATE_FORMAT(expected_end_date_time, '%H:%i') as expected_end_date_time, TIMESTAMPDIFF(MINUTE, start_datetime, stop_datetime) as on_minuts
+	from boiler_logs order by id desc limit 5";
 	$bresults = $conn->query($bquery);
 	if (mysqli_num_rows($bresults) == 0){
-		echo "<div class=\"list-group\"><a href=\"#\" class=\"list-group-item\"><i class=\"fa fa-exclamation-triangle red\"></i>&nbsp;&nbsp;".$LANG['boiler_no_logs']."</a>";
+		echo '<div class=\"list-group\"><a href="#" class="list-group-item"><i class="fa fa-exclamation-triangle red"></i>&nbsp;&nbsp;No boiler log record found !!! </a>';
 	} else {
-		echo "<p class=\"text-muted\">". mysqli_num_rows($bresults) .$LANG['boiler_last_log']."</p>
-		<div class=\"list-group\">" ;
-		echo "<a href=\"#\" class=\"list-group-item\"> <i class=\"ionicons ion-flame fa-1x red\"></i>".$LANG['start_end']."<span class=\"pull-right text-muted\"><em>".$LANG['on_minuts']."</em></span></a>";
+		echo '<p class="text-muted">'. mysqli_num_rows($bresults) .' Last Boiler Log Records. </p>
+		<div class=\"list-group\">' ;
+		echo '<a href="#" class="list-group-item"> <i class="ionicons ion-flame fa-1x red"></i> Start &nbsp; - &nbsp;End <span class="pull-right text-muted"><em> On Minuts </em></span></a>';
 		while ($brow = mysqli_fetch_assoc($bresults)) {
-			echo "<a href=\"#\" class=\"list-group-item\"> <i class=\"ionicons ion-flame fa-1x red\"></i> ". $brow['start_datetime']." - " .$brow['stop_datetime']." <span class=\"pull-right text-muted\"><em> ".$brow['on_minuts']."&nbsp;</em></span></a>";
+			echo '<a href="#" class="list-group-item"> <i class="ionicons ion-flame fa-1x red"></i> '. $brow['start_datetime'].' - ' .$brow['stop_datetime'].' <span class="pull-right text-muted"><em> '.$brow['on_minuts'].'&nbsp;</em></span></a>';
 		}
 	}
-	echo "</div>
-	</div><div class=\"modal-footer\"><button type=\"button\" class=\"btn btn-default btn-sm\" data-dismiss=\"modal\">".$LANG['close']."</button>
-	</div></div></div></div>";	
+	echo '</div>
+	</div><div class="modal-footer"><button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Close</button>
+	</div></div></div></div>';	
 ?>
 
 
@@ -306,51 +299,51 @@ echo "</h3></button>";
 
 							<div id="collapseone" class="panel-collapse collapse animated fadeIn">
 <?php 
-							if (in_array("1", $override_arr)) {$override_status="red";}else{$override_status="blue";}
-echo "						<a style=\"color: #777; cursor: pointer; text-decoration: none;\" href=\"override.php\">
-							<button type=\"button\" class=\"btn btn-default btn-circle btn-xxl mainbtn\">
-							<h3 class=\"buttontop\"><small>".$LANG['override']."</small></h3>
-							<h3 class=\"degre\"><i class=\"fa fa-refresh fa-1x\"></i></h3>
-							<h3 class=\"status\"><small><i class=\"fa fa-circle fa-fw ".$override_status."\"></i></small>
-							</h3></button></a>";
+							if (in_array("1", $override_arr)) {$override_status='red';}else{$override_status='blue';}
+echo '						<a style="color: #777; cursor: pointer; text-decoration: none;" href="override.php">
+							<button type="button" class="btn btn-default btn-circle btn-xxl mainbtn">
+							<h3 class="buttontop"><small>Override</small></h3>
+							<h3 class="degre" ><i class="fa fa-refresh fa-1x"></i></h3>
+							<h3 class="status"><small><i class="fa fa-circle fa-fw '.$override_status.'"></i></small>
+							</h3></button></a>';
 
-							if (in_array("1", $boost_arr)) {$boost_status="red";}else{$boost_status="blue";}
-echo "						<a style=\"color: #777; cursor: pointer; text-decoration: none;\" href=\"boost.php\">
-							<button type=\"button\" class=\"btn btn-default btn-circle btn-xxl mainbtn\">
-							<h3 class=\"buttontop\"><small>".$LANG['boost']."</small></h3>
-							<h3 class=\"degre\"><i class=\"fa fa-rocket fa-1x\"></i></h3>
-							<h3 class=\"status\"><small><i class=\"fa fa-circle fa-fw ".$boost_status."\"></i></small>
-							</h3></button></a>";
+							if (in_array("1", $boost_arr)) {$boost_status='red';}else{$boost_status='blue';}
+echo '						<a style="color: #777; cursor: pointer; text-decoration: none;" href="boost.php">
+							<button type="button" class="btn btn-default btn-circle btn-xxl mainbtn">
+							<h3 class="buttontop"><small>Boost</small></h3>
+							<h3 class="degre" ><i class="fa fa-rocket fa-1x"></i></h3>
+							<h3 class="status"><small><i class="fa fa-circle fa-fw '.$boost_status.'"></i></small>
+							</h3></button></a>';
 							
 							$query = "SELECT * FROM schedule_night_climate_time WHERE id = 1";
 							$results = $conn->query($query);	
 							$row = mysqli_fetch_assoc($results);
-							if ($row['status'] == 1) {$night_status="red";}else{$night_status="blue";}
-echo "						<a style=\"color: #777; cursor: pointer; text-decoration: none;\" href=\"night_climate.php\">
-							<button type=\"button\" class=\"btn btn-default btn-circle btn-xxl mainbtn\">
-							<h3 class=\"buttontop\"><small>".$LANG['n_clima']."</small></h3>
-							<h3 class=\"degre\"><i class=\"fa fa-bed fa-1x\"></i></h3>
-							<h3 class=\"status\"><small><i class=\"fa fa-circle fa-fw ".$night_status."\"></i></small>
-							</h3></button>";
+							if ($row['status'] == 1) {$night_status='red';}else{$night_status='blue';}
+echo '						<a style="color: #777; cursor: pointer; text-decoration: none;" href="night_climate.php">
+							<button type="button" class="btn btn-default btn-circle btn-xxl mainbtn">
+							<h3 class="buttontop"><small>Night Climate</small></h3>
+							<h3 class="degre" ><i class="fa fa-bed fa-1x"></i></h3>
+							<h3 class="status"><small><i class="fa fa-circle fa-fw '.$night_status.'"></i></small>
+							</h3></button>';
 							
-							if ($away_active=="1"){$awaystatus="red";}elseif ($away_active=="0"){$awaystatus="blue";}
-echo "						<a href=\"javascript:active_away();\">
-							<button type=\"button\" class=\"btn btn-default btn-circle btn-xxl mainbtn\">
-							<h3 class=\"buttontop\"><small>".$LANG['away']."</small></h3>
-							<h3 class=\"degre\"><i class=\"fa fa-sign-out fa-1x\"></i></h3>
-							<h3 class=\"status\"><small><i class=\"fa fa-circle fa-fw ".$awaystatus."\"></i></small>
-							</h3></button></a>";
+							if ($away_active=='1'){$awaystatus="red";}elseif ($away_active=='0'){$awaystatus="blue";}
+echo '						<a href="javascript:active_away();">
+							<button type="button" class="btn btn-default btn-circle btn-xxl mainbtn">
+							<h3 class="buttontop"><small>Away</small></h3>
+							<h3 class="degre" ><i class="fa fa-sign-out fa-1x"></i></h3>
+							<h3 class="status"><small><i class="fa fa-circle fa-fw '.$awaystatus.'"></i></small>
+							</h3></button></a>';
 ?>
 							<a style="color: #777; cursor: pointer; text-decoration: none;" href="holidays.php">
 							<button type="button" class="btn btn-default btn-circle btn-xxl mainbtn">
-							<h3 class="buttontop"><small><?php echo $LANG['holiday']; ?></small></h3>
+							<h3 class="buttontop"><small>Holidays</small></h3>
 							<h3 class="degre" ><i class="fa fa-paper-plane fa-1x"></i></h3>
 							<h3 class="status"><small style="color:#048afd;"><i class="fa fa-circle fa-fw"></i></small>
 							</h3></button></a>
 
 							<a style="color: #777; cursor: pointer; text-decoration: none;" href="zone_add.php">
 							<button type="button" class="btn btn-default btn-circle btn-xxl mainbtn">
-							<h3 class="buttontop"><small><?php echo $LANG['add_zone']; ?></small></h3>
+							<h3 class="buttontop"><small>Add Zone</small></h3>
 							<h3 class="degre" ><i class="fa fa-plus fa-1x"></i></h3>
 							<h3 class="status"><small style="color:#048afd;"><i class="fa fa-fw"></i></small>
 							</h3></button></a>
@@ -359,25 +352,32 @@ echo "						<a href=\"javascript:active_away();\">
                         <!-- /.panel-body -->
 						<div class="panel-footer">
 <?php 
-ShowWeather($conn);
+$query="select * from weather";
+$result = $conn->query($query);
+$weather = mysqli_fetch_array($result);
 ?>
+<?php //$weather = getWeather(); ?><?php echo $weather['c'] ;?>&deg;C
+<span><img border="0" width="24" src="images/<?php echo $weather['img'];?>.png" title="<?php echo $weather['title'];?> - 
+<?php echo $weather['description'];?>"></span> <span><?php echo $weather['title'];?> - 
+<?php echo $weather['description'];?></span>
+
                             <div class="pull-right">
                                 <div class="btn-group">
 <?php
-$query="SELECT date(start_datetime) AS date, 
-SUM(TIMESTAMPDIFF(MINUTE, start_datetime, expected_end_date_time)) AS total_minuts,
-SUM(TIMESTAMPDIFF(MINUTE, start_datetime, stop_datetime)) AS on_minuts, 
-(SUM(TIMESTAMPDIFF(MINUTE, start_datetime, expected_end_date_time)) - SUM(TIMESTAMPDIFF(MINUTE, start_datetime, stop_datetime))) AS save_minuts
-FROM boiler_logs WHERE date(start_datetime) = CURDATE() GROUP BY date(start_datetime) ASC";
+$query="select date(start_datetime) as date, 
+sum(TIMESTAMPDIFF(MINUTE, start_datetime, expected_end_date_time)) as total_minuts,
+sum(TIMESTAMPDIFF(MINUTE, start_datetime, stop_datetime)) as on_minuts, 
+(sum(TIMESTAMPDIFF(MINUTE, start_datetime, expected_end_date_time)) - sum(TIMESTAMPDIFF(MINUTE, start_datetime, stop_datetime))) as save_minuts
+from boiler_logs WHERE date(start_datetime) = CURDATE() GROUP BY date(start_datetime) asc";
 $result = $conn->query($query);
 $boiler_time = mysqli_fetch_array($result);
 $boiler_time_total = $boiler_time['total_minuts'];
 $boiler_time_on = $boiler_time['on_minuts'];
 $boiler_time_save = $boiler_time['save_minuts'];
-if($boiler_time_on >0){	echo " <i class=\"ionicons ion-ios-clock-outline\"></i> ".secondsToWords(($boiler_time_on)*60);}
+if($boiler_time_on >0){	echo ' <i class="ionicons ion-ios-clock-outline"></i> '.secondsToWords(($boiler_time_on)*60);}
 ?>
                                 </div>
                             </div>
                         </div>
                     </div>
-<?php if(isset($conn)) { $conn->close();} ?> 
+<?php if(isset($conn)) { $conn->close();} ?>

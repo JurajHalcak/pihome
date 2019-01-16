@@ -16,6 +16,7 @@
 * loss or damage to you or your property.                               *"
 * DO NOT MAKE ANY CHANGES TO YOUR HEATING SYSTEM UNTILL UNLESS YOU KNOW *"
 * WHAT YOU ARE DOING                                                    *"
+* Language support by Juraj Halcak :: juraj@halcak.sk :: 19.01.12       *"
 *************************************************************************"
 */
 
@@ -26,9 +27,10 @@ require_once(__DIR__.'/st_inc/session.php');
 confirm_logged_in();
 require_once(__DIR__.'/st_inc/connection.php');
 require_once(__DIR__.'/st_inc/functions.php');
+require_once(__DIR__.'/lang/sk.inc');
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="sk">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -144,9 +146,9 @@ require_once(__DIR__.'/st_inc/functions.php');
                         <i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-user">
-                        <li><a href="selfpwd.php"><i class="fa fa-user fa-key fa-fw"></i> Change Password</a></li>
+                        <li><a href="selfpwd.php"><i class="fa fa-user fa-key fa-fw"></i> <?php echo $LANG['change_pass']; ?> </a></li>
                         <li class="divider"></li>
-                        <li><a href="logout.php"><i class="fa fa-sign-out fa-fw"></i> Logout</a></li>
+                        <li><a href="logout.php"><i class="fa fa-sign-out fa-fw"></i> <?php echo $LANG['logout']; ?> </a></li>
                     </ul>
                     <!-- /.dropdown-user -->
                 </li>
@@ -154,17 +156,30 @@ require_once(__DIR__.'/st_inc/functions.php');
             </ul>
         </nav>
 <?php 
-$query="select * from weather;";
+// ShowWeather($conn);
+$query="SELECT * FROM weather;";
 $result=$conn->query($query);
 $weather = mysqli_fetch_array($result);
+$c_f = settings($conn, 'c_f');
+if($c_f==1 || $c_f=='1')
+{
+    $TUnit='F';
+    $WUnit='mph';
+}
+else
+{
+    $TUnit='C';
+    $WUnit='km/s';
+}
 ?>
+
 
 <div class="modal fade" id="weather" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" >
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
 			<button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
-                <h5 class="modal-title"><i class="fa fa-sun-o fa-fw"></i> <?php echo $weather['location'] ;?> Weather</h5>
+                <h5 class="modal-title"><i class="fa fa-sun-o fa-fw"></i> <?php echo $weather['location']; echo $LANG['weather']; ?> </h5>
             </div>
             <div class="modal-body">
 			<div class="row"> 
@@ -174,32 +189,32 @@ $weather = mysqli_fetch_array($result);
 <?php echo $weather['description'];?></span></h5>
 				</div>
             <div class="col-xs-7 col-sm-6 col-md-6 wdata">
-                Sunrise: <?php echo date('H:i', $weather['sunrise']);?> <br>
-                Sunset: <?php echo date('H:i', $weather['sunset']);?> <br>
-                Wind: <?php echo $weather['wind_speed'];?> km/s
+                <?php echo $LANG['sunrise']; echo date('H:i', $weather['sunrise']);?> <br>
+                <?php echo $LANG['sunset']; echo date('H:i', $weather['sunset']);?> <br>
+                <?php $LANG['wind']; echo $weather['wind_speed']; echo $LANG['speed_unit'];?>
 			<?php //date_sun_info( int $weather['sunrise'], float $weather['lat'] , float $weather['lon']) ;?>
 			</div>     
             <div class="col-xs-5 col-sm-6 col-md-6">
-                <span class="pull-right degrees"><?php echo $weather['c'] ;?>&deg;C</span>
+                <span class="pull-right degrees"><?php echo $weather['c'] ; echo $LANG['deg_c'];?></span>
             </div> 
         </div> 
 		<br>
 			<div class="row"> 
 			<div class="col-lg-12">
-			<h4 class="text-center">Six Days Weather</h4>
+			<h4 class="text-center"><?php echo $LANG['pr_6day']; ?></h4>
 	<div class="list-group">
 <?php
 $weather_api = file_get_contents('weather_6days.json');
 $weather_data = json_decode($weather_api, true);
 //echo '<pre>' . print_r($weather_data, true) . '</pre>';
 foreach($weather_data['list'] as $day => $value) {
-echo '<a href="weather.php" class="list-group-item"><img border="0" width="28" height="28" src="images/'.$value['weather'][0]['icon'].'.png">
-'.$value['weather'][0]['main']." - " .$value['weather'][0]['description'].'<span class="pull-right text-muted small"><em>'.round($value['temp']['max'],0)."&deg; - ".round($value['temp']['min'],0).'&deg;</em></span></a>';
+echo "<a href=\"weather.php\" class=\"list-group-item\"><img border=\"0\" width=\"28\" height=\"28\" src=\"images/".$value['weather'][0]['icon'].".png\">
+".$value['weather'][0]['main']." - " .$value['weather'][0]['description']."<span class=\"pull-right text-muted small\"><em>".round($value['temp']['max'],0)."&deg; - ".round($value['temp']['min'],0)."&deg;</em></span></a>";
 }
 ?>
 </div>
-<a href="weather.php" button type="button" class="btn btn-default login btn-sm btn-edit">3 Hour Forcast</a>
-<button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Close</button>
+<a href="weather.php" button type="button" class="btn btn-default login btn-sm btn-edit"><?php echo $LANG['pr_3hr']; ?></a>
+<button type="button" class="btn btn-default btn-sm" data-dismiss="modal"><?php echo $LANG['close']; ?></button>
         </div></div>
 </div>
         </div>

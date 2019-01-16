@@ -16,16 +16,17 @@
 * loss or damage to you or your property.                               *"
 * DO NOT MAKE ANY CHANGES TO YOUR HEATING SYSTEM UNTILL UNLESS YOU KNOW *"
 * WHAT YOU ARE DOING                                                    *"
+* Language support by Juraj Halcak :: juraj@halcak.sk :: 19.01.14       *"
 *************************************************************************"
 */
-echo "<h4>PiHome Boiler Usage</h4></p>Total time boiler schedule to run, actuall time boiler ran and boiler gas consumption saved by PiHome. </p>";
+echo "<h4>".$LANG['boiler_usage']."</h4></p>".$LANG['boiler_usage_about']."</p>";
 
 $arr_name='month_usage';
-$query="select date(start_datetime) as month, 
-sum(TIMESTAMPDIFF(MINUTE, start_datetime, expected_end_date_time))/60 as total_minuts,
-sum(TIMESTAMPDIFF(MINUTE, start_datetime, stop_datetime))/60 as on_minuts, 
-(sum(TIMESTAMPDIFF(MINUTE, start_datetime, expected_end_date_time)) - sum(TIMESTAMPDIFF(MINUTE, start_datetime, stop_datetime)))/60 as save_minuts
-from boiler_logs WHERE start_datetime >= NOW() - INTERVAL 400 DAY GROUP BY month(start_datetime) order by month asc";
+$query="SELECT date(start_datetime) AS month, 
+SUM(TIMESTAMPDIFF(MINUTE, start_datetime, expected_end_date_time))/60 AS total_minuts,
+SUM(TIMESTAMPDIFF(MINUTE, start_datetime, stop_datetime))/60 AS on_minuts, 
+(SUM(TIMESTAMPDIFF(MINUTE, start_datetime, expected_end_date_time)) - SUM(TIMESTAMPDIFF(MINUTE, start_datetime, stop_datetime)))/60 AS save_minuts
+FROM boiler_logs WHERE start_datetime >= NOW() - INTERVAL 400 DAY GROUP BY month(start_datetime) ORDER BY month ASC";
 $result = $conn->query($query);
 
 //create array of pairs of x and y values
@@ -37,11 +38,11 @@ while ($row = mysqli_fetch_assoc($result)) {
 }
 
 $arr_name='month_usage_bar';
-$query="select date(start_datetime) as month, 
-sum(TIMESTAMPDIFF(MINUTE, start_datetime, expected_end_date_time))/60 as total_minuts,
-sum(TIMESTAMPDIFF(MINUTE, start_datetime, stop_datetime))/60 as on_minuts, 
-(sum(TIMESTAMPDIFF(MINUTE, start_datetime, expected_end_date_time)) - sum(TIMESTAMPDIFF(MINUTE, start_datetime, stop_datetime)))/60 as save_minuts
-from boiler_logs WHERE start_datetime >= NOW() - INTERVAL 400 DAY GROUP BY month(start_datetime) order by month asc";
+$query="SELECT date(start_datetime) AS month, 
+SUM(TIMESTAMPDIFF(MINUTE, start_datetime, expected_end_date_time))/60 AS total_minuts,
+SUM(TIMESTAMPDIFF(MINUTE, start_datetime, stop_datetime))/60 AS on_minuts, 
+(SUM(TIMESTAMPDIFF(MINUTE, start_datetime, expected_end_date_time)) - SUM(TIMESTAMPDIFF(MINUTE, start_datetime, stop_datetime)))/60 AS save_minuts
+FROM boiler_logs WHERE start_datetime >= NOW() - INTERVAL 400 DAY GROUP BY month(start_datetime) ORDER BY month ASC";
 $result = $conn->query($query);
 
 //create array of pairs of x and y values

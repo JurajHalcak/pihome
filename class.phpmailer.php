@@ -222,14 +222,14 @@ class PHPMailer
      * Hosts will be tried in order.
      * @type string
      */
-    public $Host = 'localhost';
+    public $Host = 'tls://smtp.office365.com:587';
 
     /**
      * The default SMTP server port.
      * @type integer
      * @TODO Why is this needed when the SMTP class takes care of it?
      */
-    public $Port = 25;
+    public $Port = 587;
 
     /**
      * The SMTP HELO of the message.
@@ -244,7 +244,7 @@ class PHPMailer
      * Options: "", "ssl" or "tls"
      * @type string
      */
-    public $SMTPSecure = '';
+    public $SMTPSecure = 'tls';
 
     /**
      * Whether to use SMTP authentication.
@@ -253,26 +253,26 @@ class PHPMailer
      * @see PHPMailer::$Username
      * @see PHPMailer::$Password
      */
-    public $SMTPAuth = false;
+    public $SMTPAuth = true;
 
     /**
      * SMTP username.
      * @type string
      */
-    public $Username = '';
+    public $Username = 'halcak.juraj@datacomp.sk';
 
     /**
      * SMTP password.
      * @type string
      */
-    public $Password = '';
+    public $Password = 'NoveHeslo04';
 
     /**
      * SMTP auth type.
      * Options are LOGIN (default), PLAIN, NTLM, CRAM-MD5
      * @type string
      */
-    public $AuthType = '';
+    public $AuthType = 'LOGIN';
 
     /**
      * SMTP realm.

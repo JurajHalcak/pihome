@@ -70,43 +70,43 @@ if (isset($_POST['submit'])) {
 	$zone_id = mysqli_insert_id($conn);
 
 	if ($result) {
-		$message_success = "<p>Zone Record Added Successfuly.</p>";
+		$message_success = "<p>".$LANG['zone_add_ok']."</p>";
 	} else {
-		$error = "<p>{$LANG['add_purchase_failed']}</p> <p>" .mysqli_error($conn). "</p>";
+		$error = "<p>".$LANG['zone_add_fail'].mysqli_error($conn). "</p>";
 	}
 	//Add Zone to message out table at same time to send out instructions to controller for each zone. 
-	$query = "INSERT INTO messages_out (node_id, child_id, sub_type, ack, type, payload, sent, zone_id)VALUES ('{$controler}','{$controler_child_id}', '1', '1', '2', '0', '0', '{$zone_id}');";
+	$query = "INSERT INTO messages_out (node_id, child_id, sub_type, payload, sent, zone_id)VALUES ('{$controler}','{$controler_child_id}', '2', '0', '1', '{$zone_id}');";
 	$result = $conn->query($query);
 	if ($result) {
-		$message_success .= "<p>Zone Controler Record Added Successfuly.</p>";
+		$message_success .= "<p>".$LANG['ctrl_add_ok']."</p>";
 	} else {
-		$error = "<p>Zone Controler Recrd Addition Failed!!!</p> <p>" .mysqli_error($conn). "</p>";
+		$error = "<p>".$LANG['ctrl_add_fail'].mysqli_error($conn). "</p>";
 	}
 
 	//Add Zone Boost Button Console to message out table at same time
 	$query = "INSERT INTO messages_out (node_id, child_id, sub_type, payload, sent, zone_id)VALUES ('{$boost_button_id}','{$boost_button_child_id}', '2', '0', '1', '{$zone_id}');";
 	$result = mysqli_fetch_array($query, $connection);
 	if ($result) {
-		$message_success .= "<p>Zone Boost Button Record Added Successfuly.</p>";
+		$message_success .= "<p>".$LANG['zone_add_ok']."</p>";
 	} else {
-		$error = "<p>Zone Boost Button Recrd Addition Failed!!!</p> <p>" .mysqli_error($conn). "</p>";
+		$error = "<p>".$LANG['zone_add_fail'].mysqli_error($conn). "</p>";
 	}
 	
 	//Add Zone to boost table at same time
 	$query = "INSERT INTO boost (status, zone_id, temperature, minute, boost_button_id, boost_button_child_id)VALUES ('0', '{$zone_id}','{$max_c}','{$max_operation_time}', '{$boost_button_id}', '{$boost_button_child_id}');";
 	$result = $conn->query($query);
 	if ($result) {
-		$message_success .= "<p>Zone Boost Record Added Successfuly.</p>";
+		$message_success .= "<p>".$LANG['boost_add_ok']."</p>";
 	} else {
-		$error = "<p>Zone Boost Recrd Addition Failed!!!</p> <p>" .mysqli_error($conn). "</p>";
+		$error = "<p>".$LANG['boost_add_fail'].mysqli_error($conn). "</p>";
 	}
 	//Add Zone to override table at same time
 	$query = "INSERT INTO override (status, zone_id, temperature) VALUES ('0', '{$zone_id}','{$max_c}');";
 	$result = $conn->query($query);
 	if ($result) {
-		$message_success .= "<p>Zone Override Record Added Successfuly.</p>";
+		$message_success .= "<p>".$LANG['over_add_ok']."</p>";
 	} else {
-		$error = "<p>Zone Override Record Addition Failed!!!</p> <p>" .mysqli_error($conn). "</p>";
+		$error = "<p>".$LANG['over_add_ok'].mysqli_error($conn). "</p>";
 	}
 	/* No need to modify Night Schedule as its only Zone editing
 	//Add Zone to schedule_night_climat_zone table at same time
@@ -119,7 +119,7 @@ if (isset($_POST['submit'])) {
 		$error = "<p>Zone Night Climate Record Addition Failed!!!</p> <p>" .mysqli_error($conn). "</p>";
 	}
 	*/
-	$alert_message="Zone ".$name." will not be added to any exiting heating Schedule!!!";
+	$alert_message=$LANG['zone_schedule_no'].$name.$LANG['zone_schedule_no2'];
 }
 ?>
 <?php include("header.php");  ?>
@@ -128,7 +128,7 @@ if (isset($_POST['submit'])) {
 
 <?php include_once("notice.php"); ?>
 <?php 
-$query = "select * from zone where id = {$id} limit 1;";
+$query = "SELECT * FROM zone WHERE id = {$id} limit 1;";
 $result = $conn->query($query);
 $row = mysqli_fetch_assoc($result);
 ?>
@@ -140,7 +140,7 @@ $row = mysqli_fetch_assoc($result);
                 <div class="col-lg-12">
                    <div class="panel panel-primary">
                         <div class="panel-heading">
-                            Edit Zone: <?php echo $row['name'] ;?>
+                            <?php echo $LANG['zone_edit']; echo $row['name'] ;?>
 						<div class="pull-right"> <div class="btn-group"><?php echo date("H:i"); ?></div> </div>
                         </div>
                         <!-- /.panel-heading -->
@@ -151,78 +151,78 @@ $row = mysqli_fetch_assoc($result);
 
 <div class="checkbox checkbox-default checkbox-circle">
 <input id="checkbox0" class="styled" type="checkbox" name="zone_status" value="1" <?php $check = ($row['status'] == 1) ? 'checked' : ''; echo $check; ?>>
-<label for="checkbox0"> Enable Zone </label>
+<label for="checkbox0"> <?php echo $LANG['zone_enable']; ?> </label>
 <div class="help-block with-errors"></div></div>
 
-<div class="form-group" class="control-label"><label>Index Number</label>
-<input class="form-control" placeholder="Index Number" value="<?php echo $row['index_id']; ?>" id="index_id" name="index_id" data-error="Index Number should contain numbers only! This number will dertimin where icon will be placed on home screen for this Zone." pattern="[0-9]+([\,|\.][0-9]+)?" autocomplete="off" required>
+<div class="form-group" class="control-label"><label><?php echo $LANG['zone_index']; ?></label>
+<input class="form-control" placeholder="<?php echo $LANG['zone_index']; ?>" value="<?php echo $row['index_id']; ?>" id="index_id" name="index_id" data-error="<?php echo $LANG['zone_index_what']; ?>" pattern="[0-9]+([\,|\.][0-9]+)?" autocomplete="off" required>
 <div class="help-block with-errors"></div></div>
 
-<div class="form-group" class="control-label"><label>Zone Name</label>
-<input class="form-control" placeholder="Zone Name" value="<?php echo $row['name']; ?>" id="name" name="name" data-error="Zone Name Can Not be Empty!" autocomplete="off" required>
+<div class="form-group" class="control-label"><label><?php echo $LANG['zone_name']; ?></label>
+<input class="form-control" placeholder="<?php echo $LANG['zone_name']; ?>" value="<?php echo $row['name']; ?>" id="name" name="name" data-error="<?php echo $LANG['zone_no_empty']; ?>" autocomplete="off" required>
 <div class="help-block with-errors"></div></div>
 
-<div class="form-group" class="control-label"><label>Zone Type</label>
-<select id="type" name="type" class="form-control select2" placeholder="Zone Type i.e Heating or Water"  data-error="Zone type Either Heating or Water!" autocomplete="off" required>
-<?php echo '<option selected >'.$row['type'].'</option>'; ?>
-<option>Heating</option>
-<option>Water</option>
+<div class="form-group" class="control-label"><label><?php echo $LANG['zone_typ']; ?></label>
+<select id="type" name="type" class="form-control select2" placeholder="<?php echo $LANG['zone_type_ie']; ?>"  data-error="<?php echo $LANG['zone_type_either']; ?>" autocomplete="off" required>
+<?php echo "<option selected >".$row['type']."</option>"; ?>
+<option><?php echo $LANG['zone_heating']; ?></option>
+<option><?php echo $LANG['zone_water']; ?></option>
 </select>				
 <div class="help-block with-errors"></div></div>
 
-<div class="form-group" class="control-label"><label>Maximum Temperature</label>
-<input class="form-control" placeholder="Maximum temperature for this zone" value="<?php echo $row['max_c']; ?>" id="max_c" name="max_c" data-error="Maximum temperature this Zone can reach before system shutdown this Zone for safty!" pattern="[0-9]+([\,|\.][0-9]+)?"  autocomplete="off" required>
+<div class="form-group" class="control-label"><label><?php echo $LANG['zone_temp_max']; ?></label>
+<input class="form-control" placeholder="<?php echo $LANG['zone_temp_max']; ?>" value="<?php echo $row['max_c']; ?>" id="max_c" name="max_c" data-error="<?php echo $LANG['zone_temp_max_safety']; ?>" pattern="[0-9]+([\,|\.][0-9]+)?"  autocomplete="off" required>
 <div class="help-block with-errors"></div></div>
 				
-<div class="form-group" class="control-label"><label>Maximum Operation Time</label>
-<input class="form-control" placeholder="Maximum opertation time for this zone, normally 45 minuts to 60 minuts." value="<?php echo $row['max_operation_time']; ?>" id="max_operation_time" name="max_operation_time" data-error="Maximum operation time this Zone can run before systems shutdown this Zone for safty!" pattern="[0-9]+([\,|\.][0-9]+)?"  autocomplete="off" required>
+<div class="form-group" class="control-label"><label><?php echo $LANG['zone_op_time']; ?></label>
+<input class="form-control" placeholder="<?php echo $LANG['zone_op_time_opt']; ?>" value="<?php echo $row['max_operation_time']; ?>" id="max_operation_time" name="max_operation_time" data-error="<?php echo $LANG['zone_op_time_safety']; ?>" pattern="[0-9]+([\,|\.][0-9]+)?"  autocomplete="off" required>
 <div class="help-block with-errors"></div></div>				
 
-<div class="form-group" class="control-label"><label>Hysteresis Time</label>
-<input class="form-control" placeholder="Hysteresis Time for Safty, Please consult your motorized volve technical manule for more details. Default is 3 Minuts." value="<?php echo $row['hysteresis_time']; ?>" id="hysteresis_time" name="hysteresis_time" data-error="Hysteresis time for safty, Please consult your motorized volve technical manule for more details. Default is 3 Minuts." pattern="[0-9]+([\,|\.][0-9]+)?"  autocomplete="off" required>
+<div class="form-group" class="control-label"><label><?php echo $LANG['zone_hyst']; ?></label>
+<input class="form-control" placeholder="<?php echo $LANG['zone_hyst_what']; ?>" value="<?php echo $row['hysteresis_time']; ?>" id="hysteresis_time" name="hysteresis_time" data-error="<?php echo $LANG['zone_hyst_what']; ?>" pattern="[0-9]+([\,|\.][0-9]+)?"  autocomplete="off" required>
 <div class="help-block with-errors"></div></div>	
 
-<div class="form-group" class="control-label"><label>Temperature Sensor ID</label>
-<select id="sensor_id" name="sensor_id" class="form-control select2" data-error="Sensor ID can not be empty!" autocomplete="off" required>
+<div class="form-group" class="control-label"><label><?php echo $LANG['zone_sensor_ID']; ?></label>
+<select id="sensor_id" name="sensor_id" class="form-control select2" data-error="<?php echo $LANG['zone_sensor_empty']; ?>" autocomplete="off" required>
 <?php 
-$query = "select * from nodes where id = {$row['sensor_id']} limit 1;";
+$query = "SELECT * FROM nodes WHERE id = {$row['sensor_id']} LIMIT 1;";
 $result = $conn->query($query);
 $s_row = mysqli_fetch_assoc($result);
 ?>
 
-<?php echo '<option selected >'.$s_row['node_id'].'</option>'; ?>
-<?php  $query = "SELECT node_id, child_id_1 FROM nodes where name = 'Temperature Sensor'";
+<?php echo "<option selected >".$s_row['node_id']."</option>"; ?>
+<?php  $query = "SELECT node_id, child_id_1 FROM nodes WHERE name = 'Temperature Sensor'";
 $result = $conn->query($query);
 echo "<option></option>";
 while ($datarw=mysqli_fetch_array($result)) {
 $node_id=$datarw["node_id"];
-echo "<option>$node_id</option>";} ?>
+echo "<option>".$node_id."</option>";} ?>
 </select>				
 <div class="help-block with-errors"></div></div>
 
 <!-- Child Sensors ID is always zero -->
 <input type="hidden" name="sensor_child_id" value="0">	
 		
-<div class="form-group" class="control-label"><label>Zone Controler ID</label>
-<select id="controler_id" name="controler_id" class="form-control select2" data-error="Zone Controler ID can not be empty! This Node connect to Zone's motorized valve" autocomplete="off" required>
+<div class="form-group" class="control-label"><label><?php echo $LANG['zone_relay']; ?></label>
+<select id="controler_id" name="controler_id" class="form-control select2" data-error="<?php echo $LANG['zone_relay_what']; ?>" autocomplete="off" required>
 <?php 
-$query = "select * from nodes where id = {$row['controler_id']} limit 1;";
+$query = "SELECT * FROM nodes WHERE id = {$row['controler_id']} LIMIT 1;";
 $result = $conn->query($query);
 $z_row = mysqli_fetch_assoc($result);
-echo '<option selected >'.$z_row['node_id'].'</option>';
-$query = "SELECT node_id FROM nodes where name = 'Zone Controller Relay'";
+echo "<option selected >".$z_row['node_id']."</option>";
+$query = "SELECT node_id FROM nodes WHERE name = 'Zone Controller Relay'";
 $result = $conn->query($query);
 echo "<option></option>";
 while ($datarw=mysqli_fetch_array($result)) {
 	$node_id=$datarw["node_id"];
-	echo "<option>$node_id</option>";} 
+	echo "<option>".$node_id."</option>";} 
 	?>
 </select>				
 <div class="help-block with-errors"></div></div>
 
-<div class="form-group" class="control-label"><label>Zone Controler's Child ID</label>
-<select id="controler_child_id" name="controler_child_id" class="form-control select2" placeholder="Zone Type i.e Heating or Water"  data-error="Child ID on Zone Controller, This value is from 1 to 8 that connect to your Zone's motorized valve relay" autocomplete="off" required>
-<?php echo '<option selected >'.$row['controler_child_id'].'</option>'; ?>
+<div class="form-group" class="control-label"><label><?php echo $LANG['zone_relay_child']; ?></label>
+<select id="controler_child_id" name="controler_child_id" class="form-control select2" placeholder="<?php echo $LANG['zone_relay_child']; ?>"  data-error="<?php echo $LANG['zone_relay_child_what']; ?>" autocomplete="off" required>
+<?php echo "<option selected >".$row['controler_child_id']."</option>"; ?>
 <option></option>
 <option>1</option>
 <option>2</option>
@@ -235,26 +235,26 @@ while ($datarw=mysqli_fetch_array($result)) {
 </select>				
 <div class="help-block with-errors"></div></div>
 
-<div class="form-group" class="control-label"><label>Boost Button ID</label>
-<select id="boost_button_id" name="boost_button_id" class="form-control select2" data-error="Zone Controler ID can not be empty! This Node connect to Zone's motorized valve" autocomplete="off" required>
+<div class="form-group" class="control-label"><label><?php echo $LANG['zone_boost_button']; ?></label>
+<select id="boost_button_id" name="boost_button_id" class="form-control select2" data-error="<?php echo $LANG['zone_boost_button_what']; ?>" autocomplete="off" required>
 <?php 
-$query = "select * from boost where zone_id = {$id}  limit 1;";
+$query = "SELECT * FROM boost WHERE zone_id = {$id}  LIMIT 1;";
 $result = $conn->query($query);
 $b_result = mysqli_fetch_assoc($result);
-echo '<option selected >'.$b_result['boost_button_id'].'</boost_button_id>';
-$query = "SELECT node_id FROM nodes where name = 'Button Console'";
+echo "<option selected >".$b_result['boost_button_id']."</option>";
+$query = "SELECT node_id FROM nodes WHERE name = 'Button Console'";
 $result = $conn->query($query);
 echo "<option></option>";
 	while ($datarw=mysqli_fetch_array($result)) {
 	$node_id=$datarw["node_id"];
-	echo "<option>$node_id</option>";} 
+	echo "<option>".$node_id."</option>";} 
 	?>
 </select>				
 <div class="help-block with-errors"></div></div>
 
-<div class="form-group" class="control-label"><label>Boost Button's Child ID</label>
-<select id="boost_button_child_id" name="boost_button_child_id" class="form-control select2" placeholder="Zone Type i.e Heating or Water"  data-error="Child ID on Zone Controller, This value is from 1 to 8 that connect to your Zone's motorized valve relay" autocomplete="off" required>
-<?php echo '<option selected >'.$b_result['boost_button_child_id'].'</option>'; ?>
+<div class="form-group" class="control-label"><label><?php echo $LANG['zone_boost_child_ID']; ?></label>
+<select id="boost_button_child_id" name="boost_button_child_id" class="form-control select2" placeholder="<?php echo $LANG['zone_boost_child_ID']; ?>"  data-error="<?php echo $LANG['zone_boost_child_what']; ?>" autocomplete="off" required>
+<?php echo "<option selected >".$b_result['boost_button_child_id']."</option>"; ?>
 <option></option>
 <option>0</option>
 <option>1</option>
@@ -268,31 +268,25 @@ echo "<option></option>";
 </select>				
 <div class="help-block with-errors"></div></div>
 
-<div class="form-group" class="control-label"><label>Boiler ID</label>
-<select id="boiler_id" name="boiler_id" class="form-control select2" data-error="Boiler ID can not be empty!" autocomplete="off" required>
-<?php if(isset($_POST['boiler_id'])) { echo '<option selected >'.$_POST['boiler_id'].'</option>'; } ?>
+<div class="form-group" class="control-label"><label><?php echo $LANG['boiler']; ?></label>
+<select id="boiler_id" name="boiler_id" class="form-control select2" data-error="<?php echo $LANG['boiler_empty']; ?>" autocomplete="off" required>
+<?php if(isset($_POST['boiler_id'])) { echo "<option selected >".$_POST['boiler_id']."</option>"; } ?>
 <?php  $query = "SELECT id, node_id, name FROM boiler;";
 $result = $conn->query($query);
 while ($datarw=mysqli_fetch_array($result)) {
-	$boiler_id=$datarw["id"].'-'.$datarw["name"].' Node ID: '.$datarw["node_id"] ;
-echo "<option>$boiler_id</option>";} ?>
+	$boiler_id=$datarw["id"]."-".$datarw["name"].$LANG['boiler_node'].$datarw["node_id"] ;
+echo "<option>".$boiler_id."</option>";} ?>
 </select>				
 <div class="help-block with-errors"></div></div>
 
-<a href="home.php"><button type="button" class="btn btn-primary btn-sm">Cancel</button></a>
+<a href="home.php"><button type="button" class="btn btn-primary btn-sm"><?php echo $LANG['cancel']; ?></button></a>
 </form>
                         </div>
                         <!-- /.panel-body -->
 						<div class="panel-footer">
 <?php 
-$query="select * from weather";
-$result = $conn->query($query);
-$weather = mysqli_fetch_array($result);
+ShowWeather($conn);
 ?>
-Outside: <?php //$weather = getWeather(); ?><?php echo $weather['c'] ;?>&deg;C
-<span><img border="0" width="24" src="images/<?php echo $weather['img'];?>.png" title="<?php echo $weather['title'];?> - 
-<?php echo $weather['description'];?>"></span> <span><?php echo $weather['title'];?> - 
-<?php echo $weather['description'];?></span>
                             <div class="pull-right">
                                 <div class="btn-group">
                                 </div>

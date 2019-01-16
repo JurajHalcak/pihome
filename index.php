@@ -16,12 +16,15 @@
 * loss or damage to you or your property.                               *"
 * DO NOT MAKE ANY CHANGES TO YOUR HEATING SYSTEM UNTILL UNLESS YOU KNOW *"
 * WHAT YOU ARE DOING                                                    *"
+* Language support by Juraj Halcak :: juraj@halcak.sk :: 19.01.14       *"
 *************************************************************************"
 */
 ?>
 <?php
 //Error reporting on php ON
-error_reporting(E_ALL);
+//error_reporting(E_ALL);
+ini_set('display_errors', 'On');
+error_reporting(E_ALL | E_STRICT);
 //Error reporting on php OFF
 //error_reporting(0);
 
@@ -32,6 +35,7 @@ if (logged_in()) {
 }
 require_once(__DIR__.'/st_inc/connection.php');
 require_once(__DIR__.'/st_inc/functions.php');
+require_once(__DIR__.'/lang/sk.inc');
 
  // start process if data is passed from url  http://192.168.99.9/index.php?user=username&pass=password
     if(isset($_GET['user']) && isset($_GET['pass'])) {
@@ -39,11 +43,11 @@ require_once(__DIR__.'/st_inc/functions.php');
 		$password = $_GET['pass'];
 		// perform validations on the form data
 		if( (((!isset($_GET['user'])) || (empty($_GET['user']))) && (((!isset($_GET['pass'])) || (empty($_GET['pass'])))) )){
-			$error_message = "Username and Password is empty.";
+			$error_message = $LANG['no_name_pass'];
 		} elseif ((!isset($_GET['user'])) || (empty($_GET['user']))) {
-			$error_message = "Username is empty.";
+			$error_message = $LANG['no_name'];
 		} elseif((!isset($_GET['pass'])) || (empty($_GET['pass']))) {
-			$error_message = "Password is empty.";
+			$error_message = $LANG['no_pass'];
 		}
 
 		$username = mysqli_real_escape_string($conn, $_POST['user']);
@@ -76,11 +80,11 @@ require_once(__DIR__.'/st_inc/functions.php');
 
 	if (isset($_POST['submit'])) {
 		if( (((!isset($_POST['username'])) || (empty($_POST['username']))) && (((!isset($_POST['password'])) || (empty($_POST['password'])))) )){
-			$error_message = "Username and Password is empty.";
+			$error_message = $LANG['no_name_pass'];
 		} elseif ((!isset($_POST['username'])) || (empty($_POST['username']))) {
-			$error_message = "Username is empty.";
+			$error_message = $LANG['no_name'];
 		} elseif((!isset($_POST['password'])) || (empty($_POST['password']))) {
-			$error_message = "Password is empty.";
+			$error_message = $LANG['no_pass'];
 		} 
 
 		$username = mysqli_real_escape_string($conn, $_POST['username']);
@@ -115,7 +119,7 @@ require_once(__DIR__.'/st_inc/functions.php');
 				$_SESSION['user_id'] = $found_user['id'];
         		$_SESSION['username'] = $found_user['username'];
 				// add entry to database if login is success
-				$query = "INSERT INTO userhistory(username, password, date, audit, ipaddress) VALUES ('{$username}', '{$password}', '{$lastlogin}', 'Failed', '{$ip}')";
+				$query = "INSERT INTO userhistory(username, password, date, audit, ipaddress) VALUES ('{$username}', '{$password}', '{$lastlogin}', 'Success', '{$ip}')";
 				$result = $conn->query($query);
         		// Jump to secured page
         		//redirect_to('home.php?uid='.$_SESSION['user_id']);
@@ -130,18 +134,18 @@ require_once(__DIR__.'/st_inc/functions.php');
 				$query = "INSERT INTO userhistory(username, password, date, audit, ipaddress) VALUES ('{$username}', '{$password}', '{$lastlogin}', 'Failed', '{$ip}')";
 				$result = $conn->query($query);
 				// username/password was not found in the database
-				$message = "Username/Password".$password." combination incorrect. Please make sure your caps lock key is off and try again.";
+				$message = $LANG['name'].$username.$LANG['comb_incor'];
 			}
 		} 
 	} else { // Form has not been submitted.
 		if (isset($_GET['logout']) && $_GET['logout'] == 1) {
-			$message = "You are now logged out.";
+			$message = $LANG['you_logout'];
 		} 
 		
 	}
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="sk">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -177,7 +181,7 @@ require_once(__DIR__.'/st_inc/functions.php');
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
-<script type='text/javascript' src='http://code.jquery.com/jquery-1.7.2.min.js'></script>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.7.2.min.js"></script>
 <script>
     if(("standalone" in window.navigator) && window.navigator.standalone){
 
@@ -217,7 +221,7 @@ html {
             <div class="col-md-4 col-md-offset-4">
                 <div class="login-panel panel panel-primary">
                     <div class="panel-heading">
-                      Please Sign In
+                      <?php echo $LANG['sign_in']; ?>
                     </div>
                     <div class="panel-body">
 					<div class="row">
@@ -230,11 +234,11 @@ html {
                             <fieldset>
                                 <div class="form-group">
 
-								<input class="form-control" placeholder="User Name" name="username" type="input" autofocus>
+								<input class="form-control" placeholder="Meno" name="username" type="input" autofocus>
 								</div>
 
                                 <div class="form-group">
-                                    <input class="form-control" placeholder="Password" name="password" type="password" value="">
+                                    <input class="form-control" placeholder="Heslo" name="password" type="password" value="">
                                 </div>
 
                                 <!-- Change this to a button or input when using this as a form -->
@@ -250,9 +254,9 @@ html {
     </div>
 	<div class="col-md-8 col-md-offset-2">
 	<div class="login-panel-foother">
-	<h6><?php echo settings($conn, 'name').' '.settings($conn, 'version')."&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;Build ".settings($conn, 'build'); ?>&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;Powered By: Raspberry Pi</h6>
+	<h6><?php echo settings($conn, 'name')." ".settings($conn, 'version')."&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;Build ".settings($conn, 'build'); ?>&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;Powered By: Raspberry Pi</h6>
 	<br><br>
-	<h6><a style="color: #707070;" href="https://en.wikipedia.org/wiki/Sudan_(rhinoceros)" target="_blank" >Dedicated to Sudan (Rhinoceros) 1973 - 2018</a></h6>
+	<h6><a style="color: #707070;" href="http://www.halcak.sk" target="_blank" >jh 2019</a></h6>
 	</div>
 	</div>
 </div>

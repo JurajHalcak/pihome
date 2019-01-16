@@ -13,7 +13,7 @@ echo "     \033[45m S M A R T   H E A T I N G   C O N T R O L \033[0m \n";
 echo "\033[31m";
 echo "***********************************************************\n";
 echo "* Zone/Boiler Relay Testing Script for PiHome Version 0.1 *\n";
-echo "* Build Date 27/02/2018 -  Update on 05/08/218            *\n";
+echo "* Build Date 27/02/2018 -  Update on 05/08/2018            *\n";
 echo "*                                    Have Fun - PiHome.eu *\n";
 echo "***********************************************************\n";
 echo " \033[0m \n";
@@ -37,12 +37,16 @@ while ($row = mysqli_fetch_assoc($results)) {
 	$zone_gpio_pin=$row['gpio_pin'];
 
 	echo "\033[36m".date('Y-m-d H:i:s'). "\033[0m -  GPIO \033[41m".$zone_gpio_pin."\033[0m set to \033[41mOn Status\033[0m for Zone: \033[32m".$zone_name."\033[0m\n";
-	exec("/usr/local/bin/gpio write ".$zone_gpio_pin." ".$relay_on);
-	exec("/usr/local/bin/gpio mode ".$zone_gpio_pin." out");
+	// exec("/usr/local/bin/gpio write ".$zone_gpio_pin." ".$relay_on);
+	// exec("/usr/local/bin/gpio mode ".$zone_gpio_pin." out");
+	exec("/usr/bin/gpio write ".$zone_gpio_pin." ".$relay_on);
+	exec("/usr/bin/gpio mode ".$zone_gpio_pin." out");
 	sleep(5);
 	echo "\033[36m".date('Y-m-d H:i:s'). "\033[0m -  GPIO \033[41m".$zone_gpio_pin."\033[0m set to \033[44mOff Status\033[0m for Zone: \033[32m".$zone_name."\033[0m\n";
-	exec("/usr/local/bin/gpio write ".$zone_gpio_pin." ".$relay_off);
-	exec("/usr/local/bin/gpio mode ".$zone_gpio_pin." out");
+	// exec("/usr/local/bin/gpio write ".$zone_gpio_pin." ".$relay_off);
+	// exec("/usr/local/bin/gpio mode ".$zone_gpio_pin." out");
+	exec("/usr/bin/gpio write ".$zone_gpio_pin." ".$relay_off);
+	exec("/usr/bin/gpio mode ".$zone_gpio_pin." out");
 	echo "----------------------------------------------------------------------- \n";
 }
 
@@ -54,12 +58,16 @@ while ($row = mysqli_fetch_assoc($results)) {
 	$boiler_gpio_pin=$row['gpio_pin'];
 	
 	echo "\033[36m".date('Y-m-d H:i:s'). "\033[0m -  GPIO \033[41m".$boiler_gpio_pin."\033[0m set to \033[41mOn Status\033[0m for Boiler: \033[32m".$boiler_name."\033[0m\n";
-	exec("/usr/local/bin/gpio write ".$boiler_gpio_pin." ".$relay_on);
-	exec("/usr/local/bin/gpio mode ".$boiler_gpio_pin." out");
+	// exec("/usr/local/bin/gpio write ".$boiler_gpio_pin." ".$relay_on);
+	// exec("/usr/local/bin/gpio mode ".$boiler_gpio_pin." out");
+	exec("/usr/bin/gpio write ".$boiler_gpio_pin." ".$relay_on);
+	exec("/usr/bin/gpio mode ".$boiler_gpio_pin." out");
 	sleep(5);
 	echo "\033[36m".date('Y-m-d H:i:s'). "\033[0m -  GPIO \033[41m".$boiler_gpio_pin."\033[0m set to \033[44mOff Status\033[0m for Boiler: \033[32m".$boiler_name."\033[0m\n";
-	exec("/usr/local/bin/gpio write ".$boiler_gpio_pin." ".$relay_off);
-	exec("/usr/local/bin/gpio mode ".$boiler_gpio_pin." out");
+	// exec("/usr/local/bin/gpio write ".$boiler_gpio_pin." ".$relay_off);
+	// exec("/usr/local/bin/gpio mode ".$boiler_gpio_pin." out");
+	exec("/usr/bin/gpio write ".$boiler_gpio_pin." ".$relay_off);
+	exec("/usr/bin/gpio mode ".$boiler_gpio_pin." out");
 	echo "----------------------------------------------------------------------- \n";
 }
 ?>
