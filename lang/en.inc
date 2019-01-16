@@ -1,0 +1,271 @@
+<?php
+$LANG['wait_sys_db'] = "Please wait while system grab latest information from database...";
+// model.php
+$LANG['piconn_set'] = "PiConnect Settings";
+$LANG['manage_piconn'] = "Mana&zcaron;uj svoje PiHome K&uacute;renie z hocikadia&lcaron; bez otv&aacute;rania portov alebo VPN pr&iacute;stupu do dom&aacute;cej sieti. Viac info na <a class=\"green\" target=\"_blank\" href=\"http://www.pihome.eu/piconnect/\"> http://www.pihome.eu/piconnect/</a>.";
+$LANG['close'] = "Close";
+$LANG['disabled'] = "Disabled";
+$LANG['active'] = "Active";
+$LANG['piconn_simplify'] = "PiConnect - Simplify the Connected Smart Heating is in beta mode.";
+$LANG['frost_protect'] = "Frost protect";
+$LANG['system_protect'] = "System will protect itself against frost";
+$LANG['temperature'] = "Temperature";
+$LANG['temp_protect'] = "Frost protection temperature";
+$LANG['cancel'] = "Cancel";
+$LANG['save'] = "Save";
+$LANG['boiler_settings'] = "Boiler Settings";
+$LANG['boiler_safety'] = "Boiler safety settings i.e. ";
+$LANG['hysteresis_what'] = "Hysteresis (Minimim delay between power off and on)";
+$LANG['boost_temperature'] = "Boost Temperature";
+$LANG['boost_setting'] = "Boost settings for each zone i.e. Maximum operating time, Maximum temperature.";
+$LANG['minute'] = "minute";
+$LANG['override_setup'] = "Override Setup";
+$LANG['override_setting'] = "Override settings for each zone i.e. Maximum temperature. Override depend on schedule and only come into effect when schedule start for any other zone.";
+$LANG['temperature_sensor'] = "Temperature Sensor";
+$LANG['sensor_abaout'] = "Temperature sensor Node id, battery level and last seen.";
+$LANG['zone_settings'] = "Zone Settings";
+$LANG['max_time'] = "Maximum operating time";
+$LANG['max_zone_temp'] = "Maximum zone temperature";
+$LANG['max'] = "Max";
+$LANG['sensor'] = "Sensor";
+$LANG['ctr'] = "Controler";
+$LANG['gpio'] = "GPIO";
+$LANG['mysensor_gw'] = "MySensors Gateway";
+$LANG['mysensors'] = "MySensors";
+$LANG['gw_status'] = "Gateway Status";
+$LANG['gw_loc'] = "Gateway Location";
+$LANG['gw_pid'] = "Gateway PID";
+$LANG['gw_since'] = "Gateway Running Since";
+$LANG['gw_rst5'] = "Gateway Script Re-Started in Last 5 Minute";
+$LANG['gw_rst'] = "Reset GW";
+$LANG['gw_search'] = "Search GW";
+$LANG['cron'] = "Cron Jobs";
+$LANG['cron_list'] = "Crone Jobs list with schedule schedule";
+$LANG['sys_t'] = "System Temperature";
+$LANG['sys_t5'] = "Last 5 CPU in-built temperature sensor reading.";
+$LANG['os_v'] = "OS Version";
+$LANG['pihome_up'] = "PiHome Update";
+$LANG['pihome_soft'] = "PiHome current software version and any available updates.";
+$LANG['current_v'] = "Current System Version"; 
+$LANG['a_update'] = "Available Update Version";
+$LANG['uptime'] = "System Uptime";
+$LANG['pi_uptime'] = "Raspberry PI up time since last reboot.";
+$LANG['backup'] = "Full System Backup";
+$LANG['backup_wait'] = "Full system backup will takes quite a while to complete.";
+$LANG['start'] = "Start";
+$LANG['wifi_s'] = "WiFi Settings";
+$LANG['wifi_status'] = "WiFi Status and total data transfered since last reboot.";
+$LANG['status'] = "Status:";
+$LANG['mac'] = "MAC:";
+$LANG['dw'] = "Download:";
+$LANG['upload'] = "Upload:";
+$LANG['eth_s'] = "Ethernet Settings";
+$LANG['speed'] = "Speed:";
+$LANG['user_accounts'] = "User Accounts";
+$LANG['pi_user'] = "PiHome User Accounts.";
+$LANG['credits'] = "Credits";
+$LANG['pihome_thx'] = "PiHome Smart heating is a free and open sources. it was only possible with help of:";
+// settingslist.php
+$LANG['settings'] = "Settings";
+$LANG['piconnect'] = "PiConnect";
+$LANG['frost'] = "Frost";
+$LANG['boiler'] = "Boiler";
+$LANG['boost'] = "Boost";
+$LANG['override'] = "Override";
+$LANG['sensors'] = "Sensors";
+$LANG['zone'] = "Zone";
+$LANG['gateway'] = "Gateway";
+$LANG['system'] = "System";
+$LANG['bck'] = "Backup";
+$LANG['wifi'] = "WiFi";
+$LANG['eth'] = "Ethernet";
+$LANG['restart_pi'] = "Restart PI";
+$LANG['shtdwn'] = "Shutdown PI";
+//overridelist.php
+$LANG['outside'] = "Outside:";
+// boilerlist.php
+$LANG['pihome_saving'] = "PiHome Saving";
+$LANG['pihome_saving_about'] = "These Savings are based on schedule start and stop time.";
+$LANG['date'] = "Date";
+$LANG['total_min'] = "Total Min";
+$LANG['on_min'] = "On Min";
+$LANG['save_min'] = "Save Min";
+// add_hollidays.php
+$LANG['holiday'] = "Holidays";
+$LANG['enable'] = "Enable";
+$LANG['departure'] = "Departure";
+$LANG['return'] = "Return";
+$LANG['submit'] = "Submit";
+$LANG['holidays_start'] = "Holidays Start Date";
+$LANG['holidays_end'] = "Holidyas End Date";
+// db.php
+$LANG['bck_start'] = "Data Base Backup Request Started, This process may take some time complete...";
+$LANG['rbt_start'] = "Server is rebooting <small> Please Do not Refresh... </small>";
+$LANG['off_start'] = "Server is Shutting down <small> Please Do not Refresh... </small>";
+// header.php
+$LANG['change_pass'] = "Change Password";
+$LANG['logout'] = "Logout";
+$LANG['weather'] = "Weather";
+$LANG['sunrise'] = "Sunrise:";
+$LANG['sunset'] = "Sunset:";
+$LANG['wind'] = "Wind:";
+$LANG['speed_unit'] = "km/h";
+$LANG['deg_c'] = "&deg;C";
+$LANG['pr_6day'] = "Six Days Weather";
+$LANG['pr_3hr'] = "3 Hour Forcast";
+// holidays.php
+$LANG['all_done'] = "All Done";
+$LANG['no_rec_id'] = "No record found for database record number ";
+$LANG['rec_succ'] = "Record Delete Successfully";
+$LANG['s_wrong'] = "Something went wrong! please try again...";
+// holidayslist.php
+$LANG['holiday_modul_not'] = "Holiday Module isn’t implanted yet!!!! ";
+$LANG['add_hol'] = "Add Holidays";
+// homelist.php
+$LANG['home'] = "Home";
+$LANG['one_touch'] = "One Touch";
+$LANG['act_today'] = " - Active Schedules for Today";
+$LANG['noact_today'] = "No Schedule Found for ";
+$LANG['exclam_3'] = "!!! ";
+$LANG['deact_today'] = "You can Disable Schedule by clicking on temperature circle.";
+$LANG['recent_logs'] = "Recent Logs";
+$LANG['boiler_no_logs'] = "No boiler log record found !!! ";
+$LANG['boiler_last_log'] = " Last Boiler Log Records. ";
+$LANG['start_end'] = " Start &nbsp; - &nbsp;Koniec ";
+$LANG['on_minuts'] = " On Minuts ";
+$LANG['n_clima'] = "Night Climate";
+$LANG['away'] = "Away";
+$LANG['add_zone'] = "Add Zone";
+// chart.php
+$LANG['graphs'] = "Graphs";
+// chartlist.php
+$LANG['pihome_graphs_temp'] = "PiHome Temperature Graps";
+$LANG['graphs_all_zone_24'] = "Temperature Graphs for last 24 hours for all Zones. ";
+// index.php
+$LANG['no_name_pass'] = "Username and Password is empty.";
+$LANG['no_name'] = "Username is empty.";
+$LANG['no_pass'] = "Password is empty.";
+$LANG['name'] = "Username ";
+$LANG['comb_incor'] = "/password combination incorrect. Please make sure your caps lock key is off and try again.";
+$LANG['you_logout'] = "You are now logged out.";
+$LANG['sign_in'] = "Please Sign In";
+// monthusage.php
+$LANG['boiler_usage'] = "PiHome Boiler Usage";
+$LANG['boiler_usage_about'] = "Total time boiler schedule to run, actuall time boiler ran and boiler gas consumption saved by PiHome. ";
+// night_climate.php
+$LANG['n_clima_suc'] = "Night Climate Time Changed Successfully!!!";
+$LANG['n_clima_fail'] = "Night Climate Changes Failed with error: ";
+$LANG['n_clima_on'] = " Enable Night Climate ";
+$LANG['n_clima_start'] = "Start Time";
+$LANG['n_clima_end'] = "End Time";
+$LANG['n_clima_min'] = "Minimum Temperature";
+$LANG['n_clima_max'] = "Maximum Temperature";
+$LANG['zone_temp'] = "Zone Temperature";
+//selfpwd.php
+$LANG['old_password_error'] = "";
+$LANG['new_password_error'] = "";
+$LANG['conf_password_error'] = "";
+$LANG['conf_password_error2'] = "";
+$LANG['old_pass_incorrect'] = "Your Old Password is Incorrect!";
+$LANG['pass_changed_ok'] = "Password is successfully changed!!!";
+$LANG['pass_changed_fail'] = "Password change failed!!! Error";
+$LANG['change_pass'] = "Change your password!!!";
+$LANG['pass_detail'] = " Please enter your password details below.  ";
+$LANG['no_spec_char'] = "Do not use any special character i.e ";
+$LANG['fullname'] = "Name and Surname";
+$LANG['username'] = "Username";
+$LANG['old_password'] = "Old Password";
+$LANG['new_password'] = "New Password";
+$LANG['confirm_password'] = "Confirm New Password";
+// settings.php
+$LANG['frost_change'] = "Frost Protection Temperature Changed to";
+$LANG['account_rem'] = "User account removed successfully...</small>";
+$LANG['zone_rem'] = "Zone records removed successfully...</small>";
+$LANG['search_gw'] = "Searching for PiHome Netwotk gateway on your local network <small> Please Do not Refresh... </small>";
+// schedule_add.php
+$LANG['schedule_add'] = "Schedule Time Added Successfully!!!";
+$LANG['schedule_add_fail'] = "Schedule Time Addition failed with error: ";
+$LANG['schedule_zid'] = "&Ccaron;asov&yacute; pl&aacute;n pre z&oacute;nu ";
+$LANG['schedule_zid_add'] = " bol pridan&yacute;!!!";
+$LANG['schedule_zid_noadd'] = "nebol pridan&yacute;!!! ";
+$LANG['add_schedule'] = "Add Schedule";
+$LANG['schedule_enable'] = "Enable Schedule";
+$LANG['sunday'] = "Sunday";
+$LANG['monday'] = "Monday";
+$LANG['tuesday'] = "Tuesday";
+$LANG['wednesday'] = "Wednesday";
+$LANG['thursday'] = "Thursday";
+$LANG['friday'] = "Friday";
+$LANG['saturday'] = "Saturday";
+$LANG['schedule_temp'] = "(po&zcaron;adovan&aacute; teplota)";
+// schedule_edit.php
+$LANG['schedule_edit_ok'] = "Schedule Time Modified Successfully!!!";
+$LANG['schedule_edit_fail'] = "&Ccaron;asov&yacute; pl&aacute;n nebol zmenen&yacute; !!! Error: ";
+$LANG['schedule_edit'] = "Edit Schedule";
+// schedulelist.php
+$LANG['schedule'] = "Schedule";
+$LANG['schedule_adding'] = "Add Schedule";
+$LANG['ne'] = "S";
+$LANG['po'] = "M";
+$LANG['ut'] = "T";
+$LANG['str'] = "W";
+$LANG['stv'] = "T";
+$LANG['pi'] = "F";
+$LANG['so'] = "S";
+$LANG['all_schedule'] = " All Schedule: ";
+// user_password.php
+$LANG['pass_empty'] = "New Password is empty.";
+$LANG['conf_empty'] = "Confirm password is empty.";
+$LANG['pass_conf_fail'] = "Password Confirmation failed. New Password and Confirm Password must be same.";
+$LANG['fields_req'] = "Fields with * are required.";
+// zone_add.php
+$LANG['zone_add_ok'] = "Zone Record Added Successfuly.";
+$LANG['zone_add_fail'] = "Zone Record Addition Failed. Error: ";
+$LANG['ctrl_add_ok'] = "Zone Controler Record Added Successfuly.";
+$LANG['ctrl_add_fail'] = "Zone Controler Recrd Addition Failed. Error: ";
+$LANG['zone_add_ok'] = "Zone Boost Button Record Added Successfuly.";
+$LANG['zone_add_fail'] = "Zone Boost Button Recrd Addition Failed. Error: ";
+$LANG['boost_add_ok'] = "Zone Boost Record Added Successfuly.";
+$LANG['boost-add-fail'] = "Zone Boost Record Addition Failed. Error: ";
+$LANG['over_add_ok'] = "Zone Override Record Added Successfuly.";
+$LANG['over_add_fail'] = "Zone Override Record Addition Failed. Error: ";
+$LANG['nclim_add_ok'] = "Zone Night Climate Record Added Successfuly. </p><p>Do Not refrest and click Back button on your Browser...";
+$LANG['nclim_add_fail'] = "Zone Night Climate Record Addition Failed. Error: ";
+$LANG['zone_schedule_no'] = "Zone ";
+$LANG['zone_schedule_no2'] = " will not be added to any exiting heating Schedule!!!";
+$LANG['zone_enable'] = "Enable Zone";
+$LANG['zone_index'] = "Index Number";
+$LANG['zone_index_what'] = "Index Number should contain numbers only! This number will dertimin where icon will be placed on home screen for this Zone.";
+$LANG['zone_name'] = "Zone Name";
+$LANG['zone_no_empty'] = "Zone Name Can Not be Empty!";
+$LANG['zone_typ'] = "Zone Type";
+$LANG['zone_type_ie'] = "Zone Type i.e Heating or Water";
+$LANG['zone_type_either'] = "Zone type Either Heating or Water!";
+$LANG['zone_heating'] = "Heating";
+$LANG['zone_water'] = "Water";
+$LANG['zone_temp_max'] = "Maximum temperature for this zone";
+$LANG['zone_temp_max_safety'] = "Maximum temperature this Zone can reach before system shutdown this Zone for safety!";
+$LANG['zone_op_time'] = "Maximum Operation Time";
+$LANG['zone_op_time_opt'] = "Maximum operation time for this zone, normally 45 minutes to 60 minutes.";
+$LANG['zone_op_time_safety'] = "Maximum operation time this Zone can run before systems shutdown this Zone for safety!";
+$LANG['zone_hyst'] = "Hysteresis Time";
+$LANG['zone_hyst_what'] = "Hysteresis Time for Safty, Please consult your motorized volve technical manule for more details. Default is 3 Minuts.";
+$LANG['zone_sensor_ID'] = "Temperature Sensor ID";
+$LANG['zone_sensor_empty'] = "Zone sensor id can not be empty!";
+$LANG['zone_relay'] = "Zone Relay Controller ID";
+$LANG['zone_relay_what'] = "Zone Controler ID can not be empty! Select Node connect to Zone's motorized valve, If your zone connected to RPI GPIO you can select 0";
+$LANG['zone_relay_child'] = "Zone Relay Controller's Child ID";
+$LANG['zone_relay_child_what'] = "Child ID on Zone Controller, This value is from 1 to 8 that connect to your Zone's motorized valve relay, If your zone connected to RPI GPIO you can select 0";
+$LANG['zone_gpio'] = "Zone Relay GPIO Pin";
+$LANG['zone_gpio_what'] = "If Zone motorized valve connected to Raspberry pi GPIO Pin,  Make sure you follow WiringPi GPIO Pin. if you are using Wireless Relay you can select any GPIO.";
+$LANG['zone_boost_button'] = "Boost Button ID";
+$LANG['zone_boost_button_what'] = "If you have Boost Console then you can select Boost Console ID";
+$LANG['zone_boost_child_ID'] = "Boost Button's Child ID";
+$LANG['zone_boost_child_what'] = "Boost Console Button ID for this Zone";
+$LANG['boiler_empty'] = "Boiler ID can not be empty!";
+$LANG['boiler_node'] = " Node ID: ";
+// zone_edit.php
+$LANG['zone_edit'] = "Edit Zone: ";
+//connection.php
+$LANG['conn'] = "Database Connecction Failed with Error: ";
+?>

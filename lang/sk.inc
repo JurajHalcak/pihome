@@ -1,1 +1,271 @@
-
+<?php
+$LANG['wait_sys_db'] = "&Ccaron;akajte pros&iacute;m. Syst&eacute;m aktualizuje inform&aacute;cie z datab&aacute;zy... ";
+// model.php
+$LANG['piconn_set'] = "PiConnect nastavenia";
+$LANG['manage_piconn'] = "Mana&zcaron;uj svoje PiHome K&uacute;renie z hocikadia&lcaron; bez otv&aacute;rania portov alebo VPN pr&iacute;stupu do dom&aacute;cej sieti. Viac info na <a class=\"green\" target=\"_blank\" href=\"http://www.pihome.eu/piconnect/\"> http://www.pihome.eu/piconnect/</a>.";
+$LANG['close'] = "Zatvor";
+$LANG['disabled'] = "Vypnut&eacute;";
+$LANG['active'] = "Akt&iacute;vne";
+$LANG['piconn_simplify'] = "PiConnect - Jednoduch&eacute; pripojenie inteligentn&eacute;ho vykurovania je v beta re&zcaron;ime.";
+$LANG['frost_protect'] = "Ochrana pred mrazom";
+$LANG['system_protect'] = "Syst&eacute;m sa ochr&aacute;ni pred mrazom";
+$LANG['temperature'] = "Teplota";
+$LANG['temp_protect'] = "Teplota ochrany pred mrazom";
+$LANG['cancel'] = "Zru&scaron;";
+$LANG['save'] = "Ulo&zcaron;";
+$LANG['boiler_settings'] = "Nastavenia kotla";
+$LANG['boiler_safety'] = "Nastavenia bezpe&ccaron;nosti kotla: ";
+$LANG['hysteresis_what'] = "Hyster&eacute;zia (Minim&aacute;lny &ccaron;as medzi zapnut&iacute;m a vypnut&iacute;m)";
+$LANG['boost_temperature'] = "Zv&yacute;&scaron; teplotu";
+$LANG['boost_setting'] = "Nastavenie zv&yacute;&scaron;enej teploty pre jednotliv&eacute; z&oacute;ny: maxim&aacute;lny pracovn&yacute; &ccaron;as, maxim&aacute;lna teplota.";
+$LANG['minute'] = "min&uacute;t";
+$LANG['override_setup'] = "Nastavenie zastavenia/potla&ccaron;enia";
+$LANG['override_setting'] = "Nastavenie zastavenia/potla&ccaron;enia pre jednotliv&eacute; z&oacute;ny: maxim&aacute;lna teplota. Zastavenie/potla&ccaron;enie z&aacute;vis&iacute; na &ccaron;asovom pl&aacute;ne a vykon&aacute; sa pri &scaron;tarte pl&aacute;nu pre hociktor&uacute; z&oacute;nu.";
+$LANG['temperature_sensor'] = "Teplotn&eacute; senzory";
+$LANG['sensor_abaout'] = "Teplotn&yacute; senzor, Node ID, stav baterie a posledn&aacute; aktualiz&aacute;cia.";
+$LANG['zone_settings'] = "Nastavenie z&oacute;n";
+$LANG['max_time'] = "Maxim&aacute;lny pracovn&yacute; &ccaron;as";
+$LANG['max_zone_temp'] = "Maxim&aacute;lna teplota z&oacute;ny";
+$LANG['max'] = "max";
+$LANG['sensor'] = "senzor";
+$LANG['ctr'] = "Kontrol&eacute;r";
+$LANG['gpio'] = "GPIO";
+$LANG['mysensor_gw'] = "MySensors Gateway";
+$LANG['mysensors'] = "MySensors";
+$LANG['gw_status'] = "Gateway stav";
+$LANG['gw_loc'] = "Gateway Location";
+$LANG['gw_pid'] = "Gateway PID";
+$LANG['gw_since'] = "Gateway Running Since";
+$LANG['gw_rst5'] = "Gateway Script Re-Started in Last 5 Minute";
+$LANG['gw_rst'] = "Reset GW";
+$LANG['gw_search'] = "Search GW";
+$LANG['cron'] = "Cron Jobs";
+$LANG['cron_list'] = "Cron Jobs zoznam s na&ccaron;asovan&iacute;m";
+$LANG['sys_t'] = "Teplota syst&eacute;mu";
+$LANG['sys_t5'] = "Posledn&eacute; 5 nameran&eacute; CPU teploty z vn&uacute;torn&eacute;ho senzora.";
+$LANG['os_v'] = "Verzia OS";
+$LANG['pihome_up'] = "PiHome Update";
+$LANG['pihome_soft'] = "PiHome s&uacute;&ccaron;asna verzia a dostupn&eacute; aktualiz&aacute;cie.";
+$LANG['current_v'] = "S&uacute;&ccaron;asna verzia syst&eacute;mu"; 
+$LANG['a_update'] = "Verzia dostupnej aktualiz&aacute;cie";
+$LANG['uptime'] = "D&lacute;&zcaron;ka behu syst&eacute;mu";
+$LANG['pi_uptime'] = "&Ccaron;as od posledn&eacute;ho re&scaron;tartu Raspberry PI.";
+$LANG['backup'] = "&Uacute;plna z&aacute;loha syst&eacute;mu";
+$LANG['backup_wait'] = "&Uacute;plna z&aacute;loha syst&eacute;mu trv&aacute; pomerne dlho.";
+$LANG['start'] = "&Scaron;tart";
+$LANG['wifi_s'] = "Nastavenia WiFi";
+$LANG['wifi_status'] = "WiFi status a celkovo prenesen&eacute; d&aacute; od posledn&eacute;ho re&scaron;tartu.";
+$LANG['status'] = "Stav:";
+$LANG['mac'] = "MAC adresa:";
+$LANG['dw'] = "Stiahnut&eacute; d&aacute;ta:";
+$LANG['upload'] = "Odoslan&eacute; d&aacute;ta:";
+$LANG['eth_s'] = "Nastavenia LAN siete";
+$LANG['speed'] = "R&yacute;chlos&tcaron;:";
+$LANG['user_accounts'] = "U&zcaron;&iacute;vatelia";
+$LANG['pi_user'] = "PiHome u&zcaron;&iacute;vatelia.";
+$LANG['credits'] = "Po&dcaron;akovanie";
+$LANG['pihome_thx'] = "PiHome inteligentn&eacute; k&uacute;renie je free a open sources len v&dcaron;aka:";
+// settingslist.php
+$LANG['settings'] = "Nastavenia";
+$LANG['piconnect'] = "PiConnect";
+$LANG['frost'] = "Ochrana";
+$LANG['boiler'] = "Kotol";
+$LANG['boost'] = "Pridaj";
+$LANG['override'] = "Zastav";
+$LANG['sensors'] = "Senzory";
+$LANG['zone'] = "Z&oacute;ny";
+$LANG['gateway'] = "Gateway";
+$LANG['system'] = "Syst&eacute;m";
+$LANG['bck'] = "Z&aacute;loha";
+$LANG['wifi'] = "WiFi";
+$LANG['eth'] = "LAN sie&tcaron;";
+$LANG['restart_pi'] = "Re&scaron;tart Pi";
+$LANG['shtdwn'] = "Vypni Pi";
+//overridelist.php
+$LANG['outside'] = "Vonku:";
+// boilerlist.php
+$LANG['pihome_saving'] = "PiHome &Uacute;spora";
+$LANG['pihome_saving_about'] = "Tieto &uacute;spory s&uacute; zalo&zcaron;en&eacute; na &ccaron;asovom rozvrhu a &ccaron;ase zastavenia.";
+$LANG['date'] = "D&aacute;tum";
+$LANG['total_min'] = "Celkovo min.";
+$LANG['on_min'] = "Zapnut&eacute; min.";
+$LANG['save_min'] = "U&scaron;etren&eacute; min.";
+// add_hollidays.php
+$LANG['holiday'] = "Dovolenka";
+$LANG['enable'] = "Zapni";
+$LANG['departure'] = "Odchod";
+$LANG['return'] = "N&aacute;vrat";
+$LANG['submit'] = "Ulo&zcaron;";
+$LANG['holidays_start'] = "D&aacute;tum za&ccaron;iatku dovolenky";
+$LANG['holidays_end'] = "D&aacute;tum ukon&ccaron;enia dovolenky";
+// db.php
+$LANG['bck_start'] = "Zalohujem databazu... Tento proces bude schv&iacute;&lcaron;u trva&tcaron;.";
+$LANG['rbt_start'] = "Server sa re&scaron;tartuje.<small> Pros&iacute;m neobnovujte str&aacute;nku... </small>";
+$LANG['off_start'] = "Server sa vyp&iacute;na.<small> Pros&iacute;m neobnovujte str&aacute;nku... </small>";
+// header.php
+$LANG['change_pass'] = "Zmeni&tcaron; heslo";
+$LANG['logout'] = "Odhl&aacute;si&tcaron; sa";
+$LANG['weather'] = "Po&ccaron;asie";
+$LANG['sunrise'] = "V&yacute;chod slnka:";
+$LANG['sunset'] = "Z&aacute;pad slnka:";
+$LANG['wind'] = "Vietor:";
+$LANG['speed_unit'] = "km/h";
+$LANG['deg_c'] = "&deg;C";
+$LANG['pr_6day'] = "Po&ccaron;asie na 6 dn&iacute;";
+$LANG['pr_3hr'] = "Predpove&dcaron; ka&zcaron;d&eacute; 3 hodiny";
+// holidays.php
+$LANG['all_done'] = "V&scaron;etko hotov&eacute;";
+$LANG['no_rec_id'] = "Nen&aacute;jdeny &zcaron;iadny z&aacute;znam v datab&aacute;ze pre z&aacute;znam &ccaron;islo ";
+$LANG['rec_succ'] = "Z&aacute;znam vymazan&yacute; &uacute;spe&scaron;ne";
+$LANG['s_wrong'] = "Nie&ccaron;o zle dopadlo! Sk&uacute;s e&scaron;te raz...";
+// holidayslist.php
+$LANG['holiday_modul_not'] = "Modul Dovolenka nie je implementovan&yacute;!!!! ";
+$LANG['add_hol'] = "Prida&tcaron; dovolenku";
+// homelist.php
+$LANG['home'] = "Domov";
+$LANG['one_touch'] = "Uk&aacute;&zcaron; viac";
+$LANG['act_today'] = " - &Ccaron;asov&yacute; pl&aacute;n na dnes";
+$LANG['noact_today'] = "Na dnes &zcaron;iadny pre ";
+$LANG['exclam_3'] = "!!! ";
+$LANG['deact_today'] = "Kliknut&iacute;m na kruh s teplotou sa vypne &ccaron;asov&yacute; pl&aacute;n.";
+$LANG['recent_logs'] = "Posledn&eacute z&aacute;znamy";
+$LANG['boiler_no_logs'] = "Nen&aacute;jden&yacute; &zcaron;iadny z&aacute;znam kotla !!! ";
+$LANG['boiler_last_log'] = " Posledn&eacute z&aacute;znamy kotla. ";
+$LANG['start_end'] = " &Scaron;tart &nbsp; - &nbsp;Koniec ";
+$LANG['on_minuts'] = " min&uacute;t ";
+$LANG['n_clima'] = "No&ccaron;n&yacute; re&zcaron;im";
+$LANG['away'] = "Sme pre&ccaron;";
+$LANG['add_zone'] = "Pridaj z&oacute;nu";
+// chart.php
+$LANG['graphs'] = "Grafy";
+// chartlist.php
+$LANG['pihome_graphs_temp'] = "PiHome teplotn&eacute; grafy";
+$LANG['graphs_all_zone_24'] = "Teplotn&eacute; grafy za posledn&yacute;ch 24 hod&iacute;n pre v&scaron;etky z&oacute;ny. ";
+// index.php
+$LANG['no_name_pass'] = "Meno a heslo neboli zadan&eacute;.";
+$LANG['no_name'] = "Meno nebolo zadan&eacute;.";
+$LANG['no_pass'] = "Heslo nebolo zadan&eacute;.";
+$LANG['name'] = "Meno ";
+$LANG['comb_incor'] = "/heslo kombin&aacute;cia nie je spr&aacute;vna. Skontroluj napr.: CapsLock a sk&uacute;s znova.";
+$LANG['you_logout'] = "Bol si odhl&aacute;sen&yacute;.";
+$LANG['sign_in'] = "Prihl&aacute;senie";
+// monthusage.php
+$LANG['boiler_usage'] = "PiHome Boiler Usage";
+$LANG['boiler_usage_about'] = "Total time boiler schedule to run, actuall time boiler ran and boiler gas consumption saved by PiHome. ";
+// night_climate.php
+$LANG['n_clima_suc'] = "No&ccaron;n&yacute; re&zcaron;im bol &uacute;spe&scaron;ne zmenen&yacute;!!!";
+$LANG['n_clima_fail'] = "Zmena no&ccaron;n&eacute;ho re&zcaron;imu zlyhala. Chyba: ";
+$LANG['n_clima_on'] = " Zapni no&ccaron;n&yacute; re&zcaron;im ";
+$LANG['n_clima_start'] = "Za&ccaron;iatok";
+$LANG['n_clima_end'] = "Koniec";
+$LANG['n_clima_min'] = "Minim&aacute;lna teplota";
+$LANG['n_clima_max'] = "Maxim&aacute;lna teplota";
+$LANG['zone_temp'] = "Teplota z&oacute;ny";
+//selfpwd.php
+$LANG['old_password_error'] = "";
+$LANG['new_password_error'] = "";
+$LANG['conf_password_error'] = "";
+$LANG['conf_password_error2'] = "";
+$LANG['old_pass_incorrect'] = "Neplatn&eacute; str&eacute; heslo!";
+$LANG['pass_changed_ok'] = "Heslo je &uacute;spe&scaron;ne zmenen&eacute;!!!";
+$LANG['pass_changed_fail'] = "Heslo nebolo zmenen&eacute;!!! Chyba";
+$LANG['change_pass'] = "Zmena hesla";
+$LANG['pass_detail'] = " Pros&iacute;m, zadajte potrebn&eacute; &uacute;daje.  ";
+$LANG['no_spec_char'] = "Nepou&zcaron;&iacute;vaj &scaron;pecialne znaky, t.j. ";
+$LANG['fullname'] = "Meno a priezvisko";
+$LANG['username'] = "U&zcaron;&iacute;vate&lcaron;sk&eacute; meno";
+$LANG['old_password'] = "Star&eacute; heslo";
+$LANG['new_password'] = "Nov&eacute; heslo";
+$LANG['confirm_password'] = "Nov&eacute; heslo e&scaron;te raz";
+// settings.php
+$LANG['frost_change'] = "Teplota ochrany pred marazom bola zmenen&aacute; na ";
+$LANG['account_rem'] = "U&zcaron;ivate&lcaron; &uacute;spe&scaron;ne zmazan&yacute;...</small>";
+$LANG['zone_rem'] = "Z&oacute;na &uacute;spe&scaron;ne zmazan&aacute;...</small>";
+$LANG['search_gw'] = "H&lcaron;ad&aacute;m PiHome Netwotk gateway v lok&aacute;lnej sieti. <small> Pros&iacute;m neobnovujte str&aacute;nku... </small>";
+// schedule_add.php
+$LANG['schedule_add'] = "&Ccaron;asov&yacute; pl&aacute;n bol pridan&yacute;!!!";
+$LANG['schedule_add_fail'] = "<p>&Ccaron;asov&yacute; pl&aacute;n nebol pridan&yacute;!!! ";
+$LANG['schedule_zid'] = "&Ccaron;asov&yacute; pl&aacute;n pre z&oacute;nu ";
+$LANG['schedule_zid_add'] = " bol pridan&yacute;!!!";
+$LANG['schedule_zid_noadd'] = "nebol pridan&yacute;!!! ";
+$LANG['add_schedule'] = "Pridaj &ccaron;asov&yacute; pl&aacute;n";
+$LANG['schedule_enable'] = "Zapni tento &ccaron;asov&yacute; pl&aacute;n";
+$LANG['sunday'] = "Nede&lcaron;a";
+$LANG['monday'] = "Pondelok";
+$LANG['tuesday'] = "Utorok";
+$LANG['wednesday'] = "Streda";
+$LANG['thursday'] = "&Scaron;tvrtok";
+$LANG['friday'] = "Piatok";
+$LANG['saturday'] = "Sobota";
+$LANG['schedule_temp'] = "(po&zcaron;adovan&aacute; teplota)";
+// schedule_edit.php
+$LANG['schedule_edit_ok'] = "&Ccaron;asov&yacute; pl&aacute;n bol &uacute;spe&scaron;ne zmenen&yacute; !!!";
+$LANG['schedule_edit_fail'] = "&Ccaron;asov&yacute; pl&aacute;n nebol zmenen&yacute; !!! Chyba: ";
+$LANG['schedule_edit'] = "&Uacute;prava &ccaron;asov&eacute;ho pl&aacute;nu";
+// schedulelist.php
+$LANG['schedule'] = "&Ccaron;asov&yacute; pl&aacute;n";
+$LANG['schedule_adding'] = "Pridaj &ccaron;asov&yacute; pl&aacute;n";
+$LANG['ne'] = "N";
+$LANG['po'] = "P";
+$LANG['ut'] = "U";
+$LANG['str'] = "S";
+$LANG['stv'] = "&Scaron;";
+$LANG['pi'] = "P";
+$LANG['so'] = "S";
+$LANG['all_schedule'] = " &Ccaron;asov&eacute; pl&aacute;ny spolu: ";
+// user_password.php
+$LANG['pass_empty'] = "Nov&eacute; heslo je pr&aacute;zdne.";
+$LANG['conf_empty'] = "E&scaron;te raz zadan&eacute; heslo je pr&aacute;zdne.";
+$LANG['pass_conf_fail'] = "Ne&uacute;spe&scaron;n&eacute; potvrdenie hesla. Nov&eacute; heslo a e&scaron;te raz zadan&eacute; heslo sa nezhoduj&uacute;.";
+$LANG['fields_req'] = "Polia s * s&uacute; povinn&eacute;.";
+// zone_add.php
+$LANG['zone_add_ok'] = "Z&oacute;na &uacute;spe&scaron;ne ulo&zcaron;en&aacute;.";
+$LANG['zone_add_fail'] = "Z&aacute;pis z&oacute;ny bol ne&uacute;spe&scaron;ny. Chyba: ";
+$LANG['ctrl_add_ok'] = "Kontrol&eacute;r z&oacute;ny &uacute;spe&scaron;ne ulo&zcaron;en&yacute;.";
+$LANG['ctrl_add_fail'] = "Z&aacute;pis kontrol&eacute;ra z&oacute;ny bol ne&uacute;spe&scaron;ny. Chyba: ";
+$LANG['zone_add_ok'] = "Tla&ccaron;&iacute;tko \"Pridaj\" z&oacute;ny &uacute;spe&scaron;ne pridan&eacute;.";
+$LANG['zone_add_fail'] = "Z&aacute;pis tla&ccaron;&iacute;tka \"Pridaj\" z&oacute;ny bol ne&uacute;spe&scaron;ny. Chyba: ";
+$LANG['boost_add_ok'] = "\"Pridaj\" pre z&oacute;nu &uacute;spe&scaron;ne ulo&zcaron;en&aacute;.";
+$LANG['boost-add-fail'] = "Z&aacute;pis \"Pridaj\" pre z&oacute;nu bol ne&uacute;spe&scaron;ny. Chyba: ";
+$LANG['over_add_ok'] = "\"Zastav\" pre z&oacute;nu &uacute;spe&scaron;ne ulo&zcaron;en&aacute;.";
+$LANG['over_add_fail'] = "Z&aacute;pis \"Zastav\" pre z&oacute;nu bol ne&uacute;spe&scaron;ny. Chyba: ";
+$LANG['nclim_add_ok'] = "Z&oacute;na &uacute;spe&scaron;ne pridan&aacute; do no&ccaron;n&eacute;ho re&zcaron;imu. </p><p>Pros&iacute;m neobnovujte str&aacute;nku, ani nestl&aacute;&ccaron;ajte tla&ccaron;&iacute;tko sp&auml;&tcaron; v prehliada&ccaron;i...";
+$LANG['nclim_add_fail'] = "Z&aacute;pis z&oacute;ny do no&ccaron;n&eacute;ho re&zcaron;imu bol ne&uacute;spe&scaron;ny. Chyba: ";
+$LANG['zone_schedule_no'] = "Z&oacute;na "
+$LANG['zone_schedule_no2'] = " nebola pridan&aacute; do &zcaron;iadneho &ccaron;asov&eacute;ho pl&aacute;nu!!!";
+$LANG['zone_enable'] = "Zapni z&oacute;nu";
+$LANG['zone_index'] = "Poradov&eacute; &ccaron;&iacute;slo";
+$LANG['zone_index_what'] = "Zadaj iba &ccaron;&iacute;slo! &Ccaron;&iacute;slo ur&ccaron;uje poradie z&oacute;ny na domovskej str&aacute;nke.";
+$LANG['zone_name'] = "N&aacute;zov z&oacute;ny";
+$LANG['zone_no_empty'] = "Meno z&oacute;ny mus&iacute; by&tcaron; zadan&eacute;!";
+$LANG['zone_typ'] = "Typ z&oacute;ny";
+$LANG['zone_type_ie'] = "Typ z&oacute;ny, t.j. k&uacute;renie alebo voda.";
+$LANG['zone_type_either'] = "Mus&iacute; by&tcaron; bu&dcaron; k&uacute;renie, alebo voda!";
+$LANG['zone_heating'] = "K&uacute;renie";
+$LANG['zone_water'] = "Voda";
+$LANG['zone_temp_max'] = "Maxim&aacute;lna teplota pre t&uacute;to z&oacute;nu.";
+$LANG['zone_temp_max_safety'] = "Maxim&aacute;lna teplota, ktor&uacute; m&ocirc;&zcaron;e t&aacute;to z&oacute;na dosiahnu&tcaron; pred vypnut&iacute;m tohto syst&eacute;mu z bezpe&ccaron;nostn&yacute;ch d&ocirc;vodov!";
+$LANG['zone_op_time'] = "Maxim&aacute;lny pracovn&yacute; &ccaron;as";
+$LANG['zone_op_time_opt'] = "Maxim&aacute;lny pracovn&yacute; &ccaron;as pre t&uacute;to z&oacute;nu, optim&aacute;lne 45 a&zcaron; 60 min&uacute;t.";
+$LANG['zone_op_time_safety'] = "Maximálny čas prevádzky tejto Zóny môže byť spustený skôr, ako systém vypne túto zónu pre bezpečnosť!";
+$LANG['zone_hyst'] = "&Ccaron;as hyster&eacute;zy";
+$LANG['zone_hyst_what'] = "&Ccaron;as hyster&eacute;zy pre bezpe&ccaron;nos&tcaron;, podrobnejšie inform&aacute;cie n&aacute;jdete v technickej pr&iacute;ručke pre motorov&eacute; ventily. Predvolen&aacute; hodnota je 3 min&uacute;ty.";
+$LANG['zone_sensor_ID'] = "ID teplotn&eacute;ho senzora";
+$LANG['zone_sensor_empty'] = "ID teplotn&eacute;ho senzora mus&iacute; by&tcaron; zadan&eacute;!";
+$LANG['zone_relay'] = "ID ovl&aacute;da&ccaron;a rel&eacute;";
+$LANG['zone_relay_what'] = "ID ovl&aacute;da&ccaron;a z&oacute;ny nem&ocirc;&zcaron;e by&tcaron; pr&aacute;zdny! Vyberte uzol pripojen&yacute; k motorizovan&eacute;mu ventilu tejto zo&oacute;ne. Ak je va&scaron;a z&oacute;na pripojen&aacute; k RPI GPIO, vyberte 0.";
+$LANG['zone_relay_child'] = "ID podriaden&eacute;ho ovl&aacute;da&ccaron;a z&oacute;ny";
+$LANG['zone_relay_child_what'] = "ID podriaden&eacute;ho ovl&aacute;da&ccaron;a z&oacute;ny. T&aacute;to hodnota je od 1 do 8, pod&lcaron;a toho, ktoré ID sa prip&aacute;ja k motorizovan&eacute;mu rel&eacute; ventilu z&oacute;ny. Ak je va&scaron;a z&oacute;na pripojen&aacute; k RPI GPIO, vyberte 0.";
+$LANG['zone_gpio'] = "Rel&eacute; z&oacute;ny pripojen&eacute; na GPIO pin";
+$LANG['zone_gpio_what'] = "Ak je motorizovan&yacute; ventil z&oacute;ny pripojen&yacute; k pinu GPIO Pin Raspberry PI, uistite sa, &zcaron;e dodr&zcaron;iavate Pin WiringPi GPIO. Ak pou&zcaron;&iacute;vate bezdr&ocirc;tov&eacute; rel&eacute;, m&ocirc;&zcaron;ete vybra&tcaron; ak&eacute;ko&lcaron;vek GPIO.";
+$LANG['zone_boost_button'] = "ID konzoly \"Pridaj\"";
+$LANG['zone_boost_button_what'] = "Ak m&aacute;te \"Pridaj\" konzolu, tak zadajte jej ID";
+$LANG['zone_boost_child_ID'] = "ID tla&ccaron;&iacute;tka na konzole \"Pridaj\"";
+$LANG['zone_boost_child_what'] = "ID tla&ccaron;&iacute;tka na konzole \"Pridaj\" pre t&uacute;to z&oacute;nu.";
+$LANG['boiler_empty'] = "&Ccaron;&iacute;slo ID kotla mus&iacute; by&tcaron; zadan&eacute;!";
+$LANG['boiler_node'] = " uzol ID: ";
+// zone_edit.php
+$LANG['zone_edit'] = "Edit&aacute;cia z&oacute;ny: ";
+//connection.php
+$LANG['conn'] = "Spojenie s databazou sa nepodarilo. Chyba: ";
+?>
