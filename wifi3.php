@@ -50,5 +50,4 @@ function ZapisDoDB($teplota,$adresa,$verzia,$conn) {
 
 
 if(isset($conn)) { $conn->close();}
-echo "Koniec";
 ?>
